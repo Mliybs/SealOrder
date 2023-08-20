@@ -46,14 +46,9 @@ jobs:
       - name: 显示目录
         run: ls
 
-      - name: 切换目录
-        run: cd SealOrder.Android
-
       - name: 构建
-        run: dotnet build -c Release
-
-      - name: 切换目录
-        run: cd ../SealOrder.Android/bin/Release/net7.0-android
-
-      - name: 显示目录
-        run: ls
+        run: |
+          cd SealOrder.Android
+          dotnet build -c Release
+          cd bin/Release/net7.0-android
+          ls
