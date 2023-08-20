@@ -43,12 +43,20 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 显示目录
-        run: ls
-
       - name: 构建
         run: |
           cd SealOrder.Android
           dotnet build -c Release
           cd bin/Release/net7.0-android
           ls
+
+      - name: 上传Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.TOKEN }}
+          file:  SealOrder.Android/bin/Release/net7.0-android/*.apk
+          tag: '114'
+          release_name: '114'
+          overwrite: true
+          file_glob: true
+          body: ""
