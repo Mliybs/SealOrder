@@ -1,0 +1,55 @@
+name: 构建Android应用
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  buildAnroid:
+    runs-on: windows-latest
+    name: 构建安卓
+    
+    steps:
+      - name: 检查
+        uses: actions/checkout@v3
+
+      - name: 安装.NET7
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: 安装安卓工作负载
+        run: dotnet workload install android
+
+      - name: 安装Android SDK Tools
+        uses: android-actions/setup-android@v2.0.2
+
+      - name: 安装Java JDK
+        uses: actions/setup-java@v3.12.0
+        with:
+          java-version: '17'
+
+      - name: 切换目录
+        run: cd SealOrder.Android
+
+      - name: 构建
+        run: dotnet build -c Release
+
+      - name: 切换目录
+        run: cd bin/Release/net7.0-android
+
+      - name: 显示目录
+        run: dir
