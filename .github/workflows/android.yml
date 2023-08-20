@@ -40,6 +40,7 @@ jobs:
       - name: 安装Java JDK
         uses: actions/setup-java@v3.12.0
         with:
+          distribution: 'temurin'
           java-version: '17'
 
       - name: 切换目录
