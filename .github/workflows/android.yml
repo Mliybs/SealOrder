@@ -44,7 +44,7 @@ jobs:
           java-version: '17'
 
       - name: 显示目录
-        run: dir /s
+        run: ls
 
       - name: 切换目录
         run: cd /SealOrder.Android
@@ -56,4 +56,4 @@ jobs:
         run: cd bin/Release/net7.0-android
 
       - name: 显示目录
-        run: dir /s
+        run: ls
