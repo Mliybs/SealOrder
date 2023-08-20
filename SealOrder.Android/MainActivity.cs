@@ -7,7 +7,7 @@ using Avalonia.ReactiveUI;
 namespace SealOrder.Android;
 
 [Activity(
-    Label = "SealOrder.Android",
+    Label = "SealOrder",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     MainLauncher = true,
