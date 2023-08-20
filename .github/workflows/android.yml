@@ -18,7 +18,7 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
-  buildAnroid:
+  buildAndroid:
     runs-on: windows-latest
     name: 构建安卓
     
@@ -47,13 +47,13 @@ jobs:
         run: ls
 
       - name: 切换目录
-        run: cd /SealOrder.Android
+        run: cd ./SealOrder.Android
 
       - name: 构建
         run: dotnet build -c Release
 
       - name: 切换目录
-        run: cd bin/Release/net7.0-android
+        run: cd ./bin/Release/net7.0-android
 
       - name: 显示目录
         run: ls
