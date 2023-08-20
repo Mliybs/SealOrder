@@ -53,7 +53,7 @@ jobs:
         run: dotnet build -c Release
 
       - name: 切换目录
-        run: cd /bin/Release/net7.0-android
+        run: cd bin/Release/net7.0-android
 
       - name: 显示目录
         run: dir /s
