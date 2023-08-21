@@ -13,6 +13,7 @@ public class MainViewModel : ViewModelBase
 
     public void Click()
     {
-        MessageBoxManager.GetMessageBoxStandard("114", "514!").ShowAsync();
+        // MessageBoxManager.GetMessageBoxStandard("114", "514!").ShowAsync();
+        new Window().Show();
     }
 }
