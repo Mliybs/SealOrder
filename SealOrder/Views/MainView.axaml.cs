@@ -11,11 +11,11 @@ public partial class MainView : UserControl
 
     private void Change(object sender, RoutedEventArgs e)
     {
-        if (Parent is MainWindow window)
+        if (Parent is Window window)
         {
             window.Content = new UserView();
         }
 
-        MessageBoxManager.GetMessageBoxStandard(string.Empty, "114").ShowAsync();
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, Parent.GetType().ToString()).ShowAsync();
     }
 }
