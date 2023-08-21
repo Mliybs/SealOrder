@@ -11,11 +11,9 @@ public partial class MainView : UserControl
 
     private void Change(object sender, RoutedEventArgs e)
     {
-        if (Parent is Window window)
+        if (Parent is ContentControl control)
         {
-            window.Content = new UserView();
+            control.Content = new UserView();
         }
-
-        MessageBoxManager.GetMessageBoxStandard(string.Empty, Parent.GetType().ToString()).ShowAsync();
     }
 }
