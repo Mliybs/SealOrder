@@ -14,11 +14,11 @@ public partial class UserView : UserControl
 
     private async void Read(object sender, RoutedEventArgs e)
     {
-        if (Parent is Window window)
+        if (Parent is TopLevel control)
         {
-            var picker = await window.StorageProvider.OpenFilePickerAsync(new()
+            var picker = await control.StorageProvider.OpenFilePickerAsync(new()
             {
-                SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync("/storage/emulated/0/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv")
+                SuggestedStartLocation = await control.StorageProvider.TryGetFolderFromPathAsync("/storage/emulated/0/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv")
             });
         }
     }
