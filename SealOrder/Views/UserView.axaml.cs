@@ -16,10 +16,7 @@ public partial class UserView : UserControl
     {
         if (Parent is TopLevel control)
         {
-            var picker = await control.StorageProvider.OpenFilePickerAsync(new()
-            {
-                SuggestedStartLocation = await control.StorageProvider.TryGetFolderFromPathAsync("/storage/emulated/0/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv")
-            });
+            var picker = await control.StorageProvider.OpenFilePickerAsync(new());
         }
     }
 }
