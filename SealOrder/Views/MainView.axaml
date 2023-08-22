@@ -8,11 +8,42 @@
              x:DataType="vm:MainViewModel">
   <Grid>
     <Grid.RowDefinitions>
-      <RowDefinition />
-      <RowDefinition />
+      <RowDefinition Height='*' />
+      <RowDefinition Height='2*' />
     </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
 
-    <Button Grid.Row='0' Click='Change' HorizontalAlignment="Center" VerticalAlignment="Center">114</Button>
-    <TextBlock Grid.Row='1' Text="{Binding Greeting}" FontWeight='Bold' HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <TextBlock
+      Grid.Row='0'
+      Grid.ColumnSpan='2'
+      FontSize='25'
+      FontWeight='Bold'
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      Text='{Binding Title}' />
+
+    <Button
+      Name='Left'
+      Grid.Row='1'
+      Grid.Column='0'
+      FontSize='25'
+      FontWeight='Bold'
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      Command='{Binding LeftClick}'
+      Content='{Binding Left}' />
+    <Button
+      Name='Right'
+      Grid.Row='1'
+      Grid.Column='1'
+      FontSize='25'
+      FontWeight='Bold'
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      Command='{Binding RightClick}'
+      Content='{Binding Right}' />
   </Grid>
 </UserControl>
