@@ -19,7 +19,7 @@
     <TextBlock
       Grid.Row='0'
       Grid.ColumnSpan='2'
-      FontSize='25'
+      FontSize='20'
       FontWeight='Bold'
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
@@ -29,7 +29,7 @@
       Name='Left'
       Grid.Row='1'
       Grid.Column='0'
-      FontSize='25'
+      FontSize='40'
       FontWeight='Bold'
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
@@ -39,7 +39,7 @@
       Name='Right'
       Grid.Row='1'
       Grid.Column='1'
-      FontSize='25'
+      FontSize='40'
       FontWeight='Bold'
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
