@@ -179,7 +179,7 @@ public class MainViewModel : ViewModelBase
 
             else
             {
-                Title = items[2].ToString();
+                Title = items[1].ToString();
 
                 Left = "赢";
 
