@@ -6,12 +6,16 @@ public class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
+        backup = items;
+
         title = items[0].ToString();
 
         left = items[1][0].ToString();
 
         right = items[2][0].ToString();
     }
+
+    private JsonElement backup;
 
     private JsonElement items = JsonDocument.Parse("""
     [
@@ -160,6 +164,17 @@ public class MainViewModel : ViewModelBase
                 Right = "赢";
             }
         }
+
+        else
+        {
+            items = backup;
+
+            Title = items[0].ToString();
+
+            Left = items[1][0].ToString();
+
+            Right = items[2][0].ToString();
+        }
     }
 
     public void RightClick()
@@ -179,12 +194,23 @@ public class MainViewModel : ViewModelBase
 
             else
             {
-                Title = items[2].ToString();
+                Title = items[1].ToString();
 
                 Left = "赢";
 
                 Right = "赢";
             }
+        }
+
+        else
+        {
+            items = backup;
+
+            Title = items[0].ToString();
+
+            Left = items[1][0].ToString();
+
+            Right = items[2][0].ToString();
         }
     }
 }
