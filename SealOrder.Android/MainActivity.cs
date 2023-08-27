@@ -17,6 +17,13 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     public MainActivity()
     {
+        AsyncMethod();
+    }
+
+    public async void AsyncMethod()
+    {
+        await Task.Delay(3000);
+
         try
         {
             SealOrder.Static.Static.LocalDirectory = ExternalCacheDir?.AbsolutePath;
