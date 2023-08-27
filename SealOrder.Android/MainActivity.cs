@@ -22,7 +22,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
     public async void AsyncMethod()
     {
-        await Task.Delay(3000);
+        await System.Threading.Tasks.Task.Delay(3000);
 
         try
         {
