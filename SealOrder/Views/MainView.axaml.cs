@@ -8,9 +8,9 @@ public partial class MainView : UserControl
     {
         InitializeComponent();
 
-        Directory.CreateDirectory("114");
+        Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "114"));
 
-        using var ouo = new StreamWriter("ouo.txt");
+        using var ouo = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "114","ouo.txt"));
 
         ouo.Write("114!");
     }
