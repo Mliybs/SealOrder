@@ -11,12 +11,12 @@ public partial class MainView : UserControl
 
     private void Know(object sender, RoutedEventArgs e)
     {
-        Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "114"));
+        Directory.CreateDirectory(Path.Combine(LocalDirectory, "114"));
 
-        using var ouo = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "114","ouo.txt"));
+        using var ouo = new StreamWriter(Path.Combine(LocalDirectory, "114","ouo.txt"));
 
         ouo.Write("114!");
 
-        MessageBoxManager.GetMessageBoxStandard(string.Empty, AppDomain.CurrentDomain.BaseDirectory).ShowAsync();
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalDirectory).ShowAsync();
     }
 }
