@@ -30,7 +30,7 @@ public static class Initial
     public static bool Initialize()
     {
         if (Environment.MediaMounted.Equals(Environment.ExternalStorageState))
-            SealOrder.Static.LocalDirectory = Environment.ExternalStorageDirectory.AbsolutePath;
+            SealOrder.Static.Static.LocalDirectory = Environment.ExternalStorageDirectory.AbsolutePath;
 
         return true
     }
