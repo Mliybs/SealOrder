@@ -9,6 +9,7 @@
             <DockPanel>
               <Menu DockPanel.Dock='Top'>
                 <MenuItem Header="ouo" Click='Know' />
+                <MenuItem Header="114" Click='Get' />
               </Menu>
               <Grid>
                 <Grid.ColumnDefinitions>

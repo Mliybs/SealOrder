@@ -19,4 +19,9 @@ public partial class MainView : UserControl
 
         MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalDirectory).ShowAsync();
     }
+
+    private void Get(object sender, RoutedEventArgs e)
+    {
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, AppDomain.CurrentDomain.BaseDirectory).ShowAsync();
+    }
 }
