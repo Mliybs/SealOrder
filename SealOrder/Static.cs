@@ -2,14 +2,21 @@ namespace SealOrder.Static;
 
 public static class Static
 {
-    public static string? directory = null;
+    private static string? cacheDirectory = null;
 
-    public static string LocalDirectory
+    private static string? fileDirectory = null;
+
+    public static string LocalCacheDirectory
     {
-        get => directory ?? AppDomain.CurrentDomain.BaseDirectory;
+        get => cacheDirectory ?? AppDomain.CurrentDomain.BaseDirectory;
 
-        set => directory = value;
+        set => cacheDirectory = value;
     }
 
-    public static string? except;
+    public static string LocalFileDirectory
+    {
+        get => fileDirectory ?? AppDomain.CurrentDomain.BaseDirectory;
+
+        set => fileDirectory = value;
+    }
 }

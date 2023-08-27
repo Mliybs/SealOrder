@@ -11,19 +11,22 @@ public partial class MainView : UserControl
 
     private void Know(object sender, RoutedEventArgs e)
     {
-        Directory.CreateDirectory(Path.Combine(LocalDirectory, "114"));
+        Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "114"));
 
-        using var ouo = new StreamWriter(Path.Combine(LocalDirectory, "114", "ouo.txt"));
+        using var ouo = new StreamWriter(Path.Combine(LocalCacheDirectory, "114", "ouo.txt"));
 
         ouo.Write("114!");
 
-        MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalDirectory).ShowAsync();
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalCacheDirectory).ShowAsync();
     }
 
-    private void Get(object sender, RoutedEventArgs e)
+    private void GetCache(object sender, RoutedEventArgs e)
     {
-        MessageBoxManager.GetMessageBoxStandard(string.Empty, directory ?? "null").ShowAsync();
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalCacheDirectory).ShowAsync();
     }
 
-    private void Raise(object sender, RoutedEventArgs e) => MessageBoxManager.GetMessageBoxStandard(string.Empty, except ?? "nope").ShowAsync();
+    private void GetFile(object sender, RoutedEventArgs e)
+    {
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalFileDirectory).ShowAsync();
+    }
 }
