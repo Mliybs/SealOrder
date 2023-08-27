@@ -15,27 +15,10 @@ namespace SealOrder.Android;
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 public class MainActivity : AvaloniaMainActivity<App>
 {
-    public MainActivity()
-    {
-        AsyncMethod();
-    }
-
-    public async void AsyncMethod()
-    {
-        await System.Threading.Tasks.Task.Delay(3000);
-
-        try
-        {
-            SealOrder.Static.Static.LocalDirectory = ExternalCacheDir?.AbsolutePath;
-        }
-        catch (System.Exception e)
-        {
-            SealOrder.Static.Static.except = e.Message;
-        }
-    }
-
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        SealOrder.Static.Static.LocalDirectory = ExternalCacheDir!.AbsolutePath;
+
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
