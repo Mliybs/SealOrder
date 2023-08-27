@@ -17,8 +17,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     public MainActivity()
     {
-        if (Environment.MediaMounted.Equals(Environment.ExternalStorageState))
-            SealOrder.Static.Static.LocalDirectory = Environment.ExternalStorageDirectory.AbsolutePath;
+        SealOrder.Static.Static.LocalDirectory = ExternalCacheDir.AbsolutePath;
     }
 
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
