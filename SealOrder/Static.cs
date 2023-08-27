@@ -10,4 +10,6 @@ public static class Static
 
         set => directory = value;
     }
+
+    public static string? param;
 }
