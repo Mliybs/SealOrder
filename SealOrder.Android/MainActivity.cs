@@ -17,7 +17,14 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     public MainActivity()
     {
-        SealOrder.Static.Static.param = ExternalCacheDir?.AbsolutePath;
+        try
+        {
+            SealOrder.Static.Static.LocalDirectory = ExternalCacheDir?.AbsolutePath;
+        }
+        catch (Exception e)
+        {
+            SealOrder.Static.Static.except = e.Message;
+        }
     }
 
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)

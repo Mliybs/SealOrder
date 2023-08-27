@@ -11,5 +11,5 @@ public static class Static
         set => directory = value;
     }
 
-    public static string? param;
+    public static string? except;
 }

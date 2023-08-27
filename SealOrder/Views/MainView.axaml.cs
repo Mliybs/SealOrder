@@ -25,5 +25,5 @@ public partial class MainView : UserControl
         MessageBoxManager.GetMessageBoxStandard(string.Empty, directory ?? "null").ShowAsync();
     }
 
-    private void Raise(object sender, RoutedEventArgs e) => MessageBoxManager.GetMessageBoxStandard(string.Empty, param is null ? "null" : param);
+    private void Raise(object sender, RoutedEventArgs e) => MessageBoxManager.GetMessageBoxStandard(string.Empty, except ?? "nope").ShowAsync();
 }
