@@ -15,23 +15,16 @@ namespace SealOrder.Android;
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 public class MainActivity : AvaloniaMainActivity<App>
 {
+    public MainActivity()
+    {
+        if (Environment.MediaMounted.Equals(Environment.ExternalStorageState))
+            SealOrder.Static.Static.LocalDirectory = Environment.ExternalStorageDirectory.AbsolutePath;
+    }
+
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
-    }
-}
-
-public static class Initial
-{
-    public static bool IsInitialized = Initialize();
-
-    public static bool Initialize()
-    {
-        if (Environment.MediaMounted.Equals(Environment.ExternalStorageState))
-            SealOrder.Static.Static.LocalDirectory = Environment.ExternalStorageDirectory.AbsolutePath;
-
-        return true;
     }
 }
