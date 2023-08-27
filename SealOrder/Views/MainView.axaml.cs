@@ -13,7 +13,7 @@ public partial class MainView : UserControl
     {
         Directory.CreateDirectory(Path.Combine(LocalDirectory, "114"));
 
-        using var ouo = new StreamWriter(Path.Combine(LocalDirectory, "114","ouo.txt"));
+        using var ouo = new StreamWriter(Path.Combine(LocalDirectory, "114", "ouo.txt"));
 
         ouo.Write("114!");
 

@@ -21,7 +21,7 @@ public class MainActivity : AvaloniaMainActivity<App>
         {
             SealOrder.Static.Static.LocalDirectory = ExternalCacheDir?.AbsolutePath;
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
             SealOrder.Static.Static.except = e.Message;
         }
