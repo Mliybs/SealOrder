@@ -32,6 +32,6 @@ public static class Initial
         if (Environment.MediaMounted.Equals(Environment.ExternalStorageState))
             SealOrder.Static.Static.LocalDirectory = Environment.ExternalStorageDirectory.AbsolutePath;
 
-        return true
+        return true;
     }
 }
