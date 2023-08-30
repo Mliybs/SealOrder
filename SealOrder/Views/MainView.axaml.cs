@@ -29,4 +29,23 @@ public partial class MainView : UserControl
     {
         MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalFileDirectory).ShowAsync();
     }
+
+    private void GetFiles(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var files = Directory.GetFiles(Path.Combine(LocalCacheDirectory, "../../com.tencent.mobileqq/Tencent/QQfile_recv"));
+
+            var builder = new StringBuilder();
+
+            for (var i = 0; i < files.Length; i++)
+                builder.Append(files[i]);
+
+            MessageBoxManager.GetMessageBoxStandard(string.Empty, builder.ToString()).ShowAsync();
+        }
+        catch (Exception exc)
+        {
+            MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
+        }
+    }
 }
