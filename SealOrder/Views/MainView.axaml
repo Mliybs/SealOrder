@@ -12,7 +12,7 @@
                 <MenuItem Header="ouo" Click='GetCache' />
                 <MenuItem Header="ouo" Click='GetFile' />
                 <MenuItem Header="ouo" Click='GetFiles' />
-                <MenuItem Header="ouo" Click='GetMime' />
+                <MenuItem Header="ouo" Click='GetData' />
               </Menu>
               <Grid>
                 <Grid.ColumnDefinitions>

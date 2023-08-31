@@ -49,8 +49,8 @@ public partial class MainView : UserControl
         }
     }
 
-    private void GetMime(object sender, RoutedEventArgs e)
+    private void GetData(object sender, RoutedEventArgs e)
     {
-        MessageBoxManager.GetMessageBoxStandard(string.Empty, Mime ?? "null").ShowAsync();
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, Data ?? "null").ShowAsync();
     }
 }

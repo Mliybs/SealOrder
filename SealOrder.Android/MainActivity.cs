@@ -35,6 +35,6 @@ public class MainActivity : AvaloniaMainActivity<App>
     {
         base.OnCreate(savedInstanceState);
 
-        SealOrder.Static.Static.Mime = Intent?.Type;
+        SealOrder.Static.Static.Data = Intent?.DataString;
     }
 }

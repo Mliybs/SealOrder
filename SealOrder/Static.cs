@@ -20,5 +20,5 @@ public static class Static
         set => fileDirectory = value;
     }
 
-    public static string? Mime { get; set; }
+    public static string? Data { get; set; }
 }
