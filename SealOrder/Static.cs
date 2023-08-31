@@ -19,4 +19,6 @@ public static class Static
 
         set => fileDirectory = value;
     }
+
+    public static string? Mime { get; set; }
 }
