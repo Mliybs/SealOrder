@@ -16,7 +16,7 @@ namespace SealOrder.Android;
 IntentFilter(
     new[] { "android.intent.action.VIEW" },
     Categories = new[] { "android.intent.category.DEFAULT" },
-    DataMimeType = "application/pdf"
+    DataMimeType = ".pdf"
 )]
 public class MainActivity : AvaloniaMainActivity<App>
 {
