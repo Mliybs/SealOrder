@@ -7,6 +7,8 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
+
+        TopLevel.GetTopLevel(this)!.GotFocus += (obj, e) => MessageBoxManager.GetMessageBoxStandard(string.Empty, "获得焦点").ShowAsync();
     }
 
     private void Know(object sender, RoutedEventArgs e)
