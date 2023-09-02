@@ -38,6 +38,10 @@ public class MainActivity : AvaloniaMainActivity<App>
         base.OnCreate(savedInstanceState);
 
         if (Intent is not null and Intent.Data is not null)
-            SealOrder.Static.Static.LoadedFile = (Intent.Data.Path!, new FileInputStream(ContentResolver.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor).ReadAllBytes);
+        {
+            var stream = new FileInputStream(ContentResolver.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
+
+            SealOrder.Static.Static.LoadedFile = (Intent.Data.Path!, stream.ReadAllBytes);
+        }
     }
 }
