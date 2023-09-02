@@ -17,7 +17,7 @@ public partial class MainView : UserControl
             {
                 if (TopLevel.GetTopLevel(this) is not null and var level)
                 {
-                    var bytes = AESDecrypt(LoadedFile.Value.Bytes, JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
+                    var bytes = AESDecrypt(LoadedFile.Value.Bytes(), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
 
                     var save = await level.StorageProvider.SaveFilePickerAsync(new()
                     {
