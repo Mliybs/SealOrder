@@ -22,6 +22,8 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        SealOrder.Static.Static.DataDirectory = DataDir!.AbsolutePath;
+
         SealOrder.Static.Static.LocalCacheDirectory = ExternalCacheDir!.AbsolutePath;
 
         SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
