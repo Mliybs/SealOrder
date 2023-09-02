@@ -37,6 +37,6 @@ public class MainActivity : AvaloniaMainActivity<App>
     {
         base.OnCreate(savedInstanceState);
 
-        SealOrder.Static.Static.LoadedPath = Intent?.DataString;
+        SealOrder.Static.Static.LoadedPath = Intent?.Data?.Path;
     }
 }
