@@ -26,7 +26,7 @@ public partial class MainView : UserControl
 
                     if (save is not null)
                     {
-                        await File.WriteAllBytesAsync(save.Path.LocalPath, bytes);
+                        await File.WriteAllBytesAsync(save.Path.AbsolutePath, bytes);
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                     }
@@ -101,7 +101,7 @@ public partial class MainView : UserControl
 
                 if (picker?.SingleOrDefault() is not null and var file)
                 {
-                    var bytes = AESEncrypt(await File.ReadAllBytesAsync(file.Path.LocalPath), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
+                    var bytes = AESEncrypt(await File.ReadAllBytesAsync(file.Path.AbsolutePath), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
 
                     var save = await level.StorageProvider.SaveFilePickerAsync(new()
                     {
@@ -110,7 +110,7 @@ public partial class MainView : UserControl
 
                     if (save is not null)
                     {
-                        await File.WriteAllBytesAsync(save.Path.LocalPath, bytes);
+                        await File.WriteAllBytesAsync(save.Path.AbsolutePath, bytes);
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                     }
@@ -139,7 +139,7 @@ public partial class MainView : UserControl
 
                 if (picker?.SingleOrDefault() is not null and var file)
                 {
-                    var bytes = AESDecrypt(await File.ReadAllBytesAsync(file.Path.LocalPath), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
+                    var bytes = AESDecrypt(await File.ReadAllBytesAsync(file.Path.AbsolutePath), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
 
                     var save = await level.StorageProvider.SaveFilePickerAsync(new()
                     {
@@ -148,7 +148,7 @@ public partial class MainView : UserControl
 
                     if (save is not null)
                     {
-                        await File.WriteAllBytesAsync(save.Path.LocalPath, bytes);
+                        await File.WriteAllBytesAsync(save.Path.AbsolutePath, bytes);
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                     }
