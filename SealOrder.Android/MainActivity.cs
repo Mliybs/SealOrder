@@ -38,7 +38,7 @@ public class MainActivity : AvaloniaMainActivity<App>
     {
         base.OnCreate(savedInstanceState);
 
-        if (Intent is not null and Intent.Data is not null)
+        if (Intent?.Data is not null)
         {
             var stream = new FileInputStream(ContentResolver.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
 
