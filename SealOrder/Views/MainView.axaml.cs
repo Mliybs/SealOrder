@@ -12,18 +12,16 @@ public partial class MainView : UserControl
 
     private async void Load(object sender, RoutedEventArgs e)
     {
-        if (LoadedPath is not null)
+        if (LoadedFile is not null)
             try
             {
                 if (TopLevel.GetTopLevel(this) is not null and var level)
                 {
-                    var decoded = System.Web.HttpUtility.UrlDecode(LoadedPath);
-                    
-                    var bytes = AESDecrypt(await File.ReadAllBytesAsync(LoadedPath), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
+                    var bytes = AESDecrypt(LoadedFile.Value.Bytes, JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
 
                     var save = await level.StorageProvider.SaveFilePickerAsync(new()
                     {
-                        SuggestedFileName = decoded[(decoded.LastIndexOf('/') + 1)..].Replace(".mdf", ".pdf")
+                        SuggestedFileName = LoadedFile.Value.Path[(LoadedFile.Value.Path.LastIndexOf('/') + 1)..].Replace(".mdf", ".pdf")
                     });
 
                     if (save is not null)
