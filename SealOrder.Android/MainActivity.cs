@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
+using Java.IO;
 
 namespace SealOrder.Android;
 
