@@ -118,7 +118,9 @@ public partial class MainView : UserControl
 
                     if (save is not null)
                     {
-                        (await save.OpenReadAsync()).Write(bytes);
+                        using var write = await save.OpenWriteAsync();
+                        
+                        write.Write(bytes);
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                     }
@@ -162,7 +164,9 @@ public partial class MainView : UserControl
 
                     if (save is not null)
                     {
-                        (await save.OpenWriteAsync()).Write(bytes);
+                        using var write = await save.OpenWriteAsync();
+                        
+                        write.Write(bytes);
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                     }
