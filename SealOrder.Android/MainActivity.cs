@@ -40,9 +40,18 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         if (Intent?.Data is not null)
         {
-            var stream = new FileInputStream(ContentResolver.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
+            SealOrder.Static.Static.LoadedFile = (Intent.Data.Path!, () =>
+            {
+                var stream = new FileInputStream(ContentResolver.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
 
-            SealOrder.Static.Static.LoadedFile = (Intent.Data.Path!, () => stream.ReadAllBytes());
+                var bytes = new byte[stream.Available()];
+
+                stream.Read(bytes);
+
+                stream.Close();
+
+                return bytes;
+            });
         }
     }
 }
