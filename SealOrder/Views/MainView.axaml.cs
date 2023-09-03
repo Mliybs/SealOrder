@@ -26,7 +26,9 @@ public partial class MainView : UserControl
 
                     if (save is not null)
                     {
-                        await File.WriteAllBytesAsync(save.Path.AbsolutePath, bytes);
+                        using var stream = await save.OpenWriteAsync();
+
+                        stream.Write(bytes);
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                     }
