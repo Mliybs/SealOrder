@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Net;
 using Android.Content;
 using Android.Content.PM;
 using AndroidX.Core.Content;
