@@ -12,35 +12,47 @@ public partial class MainView : UserControl
 
     private async void Load(object sender, RoutedEventArgs e)
     {
-        if (LoadedFile is not null)
-            try
-            {
-                if (TopLevel.GetTopLevel(this) is not null and var level)
+        if (!Path.Exists(Path.Combine(LocalCacheDirectory, "temp")))
+            Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "temp"));
+
+        if (Access is null)
+            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "未保存通行等级！").ShowAsync();
+
+        else
+            if (LoadedFile is not null)
+                try
                 {
-                    var bytes = AESDecrypt(LoadedFile.Value.Bytes(), JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
-
-                    var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                    if (TopLevel.GetTopLevel(this) is not null and var level)
                     {
-                        SuggestedFileName = LoadedFile.Value.Path[(LoadedFile.Value.Path.LastIndexOf('/') + 1)..].Replace(".mdf", ".pdf")
-                    });
+                        var bytes = AESDecrypt(LoadedFile.Value.Bytes(), JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
 
-                    if (save is not null)
-                    {
-                        using var stream = await save.OpenWriteAsync();
+                        var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                        {
+                            SuggestedFileName = LoadedFile.Value.Path[(LoadedFile.Value.Path.LastIndexOf('/') + 1)..].Replace(".mdf", ".pdf")
+                        });
 
-                        stream.Write(bytes);
+                        if (save is not null)
+                        {
+                            using var stream = await save.OpenWriteAsync();
 
-                        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                            stream.Write(bytes);
+
+                            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                        }
                     }
-                }
 
-                else
-                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "获取顶级控件失败！").ShowAsync();
-            }
-            catch (Exception exc)
-            {
-                await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
-            }
+                    else
+                        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "获取顶级控件失败！").ShowAsync();
+                }
+                catch (Exception exc)
+                {
+                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
+                }
+    }
+
+    private void Unload(object sender, RoutedEventArgs e)
+    {
+        Directory.Delete(Path.Combine(LocalCacheDirectory, "temp"), true);
     }
 
     private void Loading(object sender, RoutedEventArgs e)
@@ -92,94 +104,176 @@ public partial class MainView : UserControl
 
     private async void Encrypt(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            if (TopLevel.GetTopLevel(this) is not null and var level)
+        if (Access is null)
+            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "未保存通行等级！").ShowAsync();
+
+        else
+            try
             {
-                var picker = await level.StorageProvider.OpenFilePickerAsync(new()
+                if (TopLevel.GetTopLevel(this) is not null and var level)
                 {
-                    AllowMultiple = false
-                });
-
-                if (picker?.SingleOrDefault() is not null and var file)
-                {
-                    using var stream = await file.OpenReadAsync();
-
-                    var buffer = new byte[stream.Length];
-
-                    stream.Read(buffer);
-
-                    var bytes = AESEncrypt(buffer, JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
-
-                    var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                    var picker = await level.StorageProvider.OpenFilePickerAsync(new()
                     {
-                        SuggestedFileName = file.Name.Replace(".pdf", ".mdf")
+                        AllowMultiple = false
                     });
 
-                    if (save is not null)
+                    if (picker?.SingleOrDefault() is not null and var file)
                     {
-                        using var write = await save.OpenWriteAsync();
-                        
-                        write.Write(bytes);
+                        using var stream = await file.OpenReadAsync();
 
-                        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                        var buffer = new byte[stream.Length];
+
+                        stream.Read(buffer);
+
+                        var bytes = AESEncrypt(buffer, JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
+
+                        switch (await MessageBoxManager.GetMessageBoxCustom(new()
+                        {
+                            ContentMessage = "请选择保存或分享该文件",
+
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+
+                            ButtonDefinitions = new MsBox.Avalonia.Models.ButtonDefinition[]
+                            {
+                                new()
+                                {
+                                    Name = "保存"
+                                },
+                                
+                                new()
+                                {
+                                    Name = "分享"
+                                }
+                            }
+                        }).ShowAsync())
+                        {
+                            case "保存":
+
+                                var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                                {
+                                    SuggestedFileName = file.Name.Replace(".pdf", ".mdf")
+                                });
+
+                                if (save is not null)
+                                {
+                                    using var write = await save.OpenWriteAsync();
+                                    
+                                    write.Write(bytes);
+
+                                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                                }
+
+                                break;
+
+                            case "分享":
+
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".pdf", ".mdf")), bytes);
+
+                                if (Share is not null)
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".pdf", ".mdf")));
+
+                                else
+                                    PlatformNotSupport();
+
+                                break;
+                        }
                     }
                 }
-            }
 
-            else
-                await MessageBoxManager.GetMessageBoxStandard(string.Empty, "获取顶级控件失败！").ShowAsync();
-        }
-        catch (Exception exc)
-        {
-            await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
-        }
+                else
+                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "获取顶级控件失败！").ShowAsync();
+            }
+            catch (Exception exc)
+            {
+                await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
+            }
     }
 
     private async void Decrypt(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            if (TopLevel.GetTopLevel(this) is not null and var level)
+        if (Access is null)
+            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "未保存通行等级！").ShowAsync();
+
+        else
+            try
             {
-                var picker = await level.StorageProvider.OpenFilePickerAsync(new()
+                if (TopLevel.GetTopLevel(this) is not null and var level)
                 {
-                    AllowMultiple = false
-                });
-
-                if (picker?.SingleOrDefault() is not null and var file)
-                {
-                    using var stream = await file.OpenReadAsync();
-
-                    var buffer = new byte[stream.Length];
-
-                    stream.Read(buffer);
-
-                    var bytes = AESDecrypt(buffer, JsonDocument.Parse(Access!).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access!).RootElement.GetProperty("iv").GetString()!);
-
-                    var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                    var picker = await level.StorageProvider.OpenFilePickerAsync(new()
                     {
-                        SuggestedFileName = file.Name.Replace(".mdf", ".pdf")
+                        AllowMultiple = false
                     });
 
-                    if (save is not null)
+                    if (picker?.SingleOrDefault() is not null and var file)
                     {
-                        using var write = await save.OpenWriteAsync();
-                        
-                        write.Write(bytes);
+                        using var stream = await file.OpenReadAsync();
 
-                        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                        var buffer = new byte[stream.Length];
+
+                        stream.Read(buffer);
+
+                        var bytes = AESDecrypt(buffer, JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
+
+                        switch (await MessageBoxManager.GetMessageBoxCustom(new()
+                        {
+                            ContentMessage = "请选择保存或分享该文件",
+
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+
+                            ButtonDefinitions = new MsBox.Avalonia.Models.ButtonDefinition[]
+                            {
+                                new()
+                                {
+                                    Name = "保存"
+                                },
+                                
+                                new()
+                                {
+                                    Name = "分享"
+                                }
+                            }
+                        }).ShowAsync())
+                        {
+                            case "保存":
+
+                                var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                                {
+                                    SuggestedFileName = file.Name.Replace(".mdf", ".pdf")
+                                });
+
+                                if (save is not null)
+                                {
+                                    using var write = await save.OpenWriteAsync();
+                                    
+                                    write.Write(bytes);
+
+                                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                                }
+
+                                break;
+
+                            case "分享":
+
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".mdf", ".pdf")), bytes);
+
+                                if (Share is not null)
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".mdf", ".pdf")));
+
+                                else
+                                    PlatformNotSupport();
+
+                                break;
+                        }
                     }
                 }
-            }
 
-            else
-                await MessageBoxManager.GetMessageBoxStandard(string.Empty, "获取顶级控件失败！").ShowAsync();
-        }
-        catch (Exception exc)
-        {
-            await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
-        }
+                else
+                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "获取顶级控件失败！").ShowAsync();
+            }
+            catch (Exception exc)
+            {
+                await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
+            }
     }
 
     private async void About(object sender, RoutedEventArgs e) =>

@@ -23,12 +23,6 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
-        SealOrder.Static.Static.DataDirectory = DataDir!.AbsolutePath;
-
-        SealOrder.Static.Static.LocalCacheDirectory = ExternalCacheDir!.AbsolutePath;
-
-        SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
-
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
@@ -37,6 +31,27 @@ public class MainActivity : AvaloniaMainActivity<App>
     protected override void OnCreate(Bundle savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
+
+        SealOrder.Static.Static.DataDirectory = DataDir!.AbsolutePath;
+
+        SealOrder.Static.Static.LocalCacheDirectory = ExternalCacheDir!.AbsolutePath;
+
+        SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
+
+        SealOrder.Static.Static.Share = dir =>
+        {
+            var uri = FileProvider.GetUriForFile(this, PackageName, new Java.IO.File(dir));
+
+            var intent = new Intent("Intent.ACTION_SEND");
+
+            intent.AddFlags(ActivityFlags.GrantReadUriPermission);
+
+            intent.SetType("application/octet-stream");
+
+            intent.PutExtra(Intent.ExtraStream, uri);
+
+            StartActivity(intnet);
+        }
 
         if (Intent?.Data is not null)
         {

@@ -5,6 +5,23 @@ namespace SealOrder.Static;
 
 public static class Static
 {
+    public static void PlatformNotSupport() => MessageBoxManager.GetMessageBoxStandard(string.Empty, "此平台不支持该功能！");
+
+    public static MsBox.Avalonia.Base.IMsBox<string> GetMessageBoxCustom(MsBox.Avalonia.Dto.MessageBoxCustomParams @params, MsBox.Avalonia.Controls.MsBoxCustomView view, MsBox.Avalonia.Enums.Icon icon = MsBox.Avalonia.Enums.Icon.None, WindowStartupLocation windowStartupLocation = WindowStartupLocation.CenterScreen)
+    {
+        @params.Icon = icon;
+
+        @params.WindowStartupLocation = windowStartupLocation;
+
+        var msBoxCustomViewModel = new MsBox.Avalonia.ViewModels.MsBoxCustomViewModel(@params);
+
+        view.DataContext = msBoxCustomViewModel;
+
+        return new MsBox<MsBox.Avalonia.Controls.MsBoxCustomView,
+        MsBox.Avalonia.ViewModels.MsBoxCustomViewModel,
+        string>(view, msBoxCustomViewModel);
+    }
+
     public static byte[] AESEncrypt(byte[] text, string key, string iv)
     {
         var cipher = CipherUtilities.GetCipher("AES/OFB/NoPadding");
@@ -65,6 +82,8 @@ public static class Static
     public static (string Path, Func<byte[]> Bytes)? LoadedFile { get; set; }
 
     public static string? Access { get => File.Exists(Path.Combine(DataDirectory, "access.json")) ? File.ReadAllText(Path.Combine(DataDirectory, "access.json")) : null; }
+
+    public static Action<string>? Share { get; set; }
 
     public const string about = """
         MIT License
