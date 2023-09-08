@@ -50,7 +50,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
             intent.PutExtra(Intent.ExtraStream, uri);
 
-            StartActivity(intnet);
+            StartActivity(intent);
         }
 
         if (Intent?.Data is not null)
