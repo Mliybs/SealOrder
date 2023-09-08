@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Content;
 using Android.Content.PM;
+using AndroidX.Core.Content;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
