@@ -54,7 +54,7 @@ public partial class MainView : UserControl
             Content = new InputBox("请输入通行等级"),
 
             Name = "InputBox"
-        }).ShowAsPopupAsync(this);
+        }).ShowAsync();
 
         if (text is not null)
         {
