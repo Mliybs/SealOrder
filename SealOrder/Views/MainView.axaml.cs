@@ -93,7 +93,7 @@ public partial class MainView : UserControl
 
             File.WriteAllText(Path.Combine(DataDirectory, "access.json"), access.ToString());
 
-            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
+            // await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
             }
             catch (Exception exc)
             {
