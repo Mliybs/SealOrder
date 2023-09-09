@@ -41,7 +41,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
 
-        System.IO.Directory.CreateDirectory(System.IO.Path.Combine(LocalCacheDirectory, "public/temp"));
+        System.IO.Directory.CreateDirectory(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "public/temp"));
 
         SealOrder.Static.Static.Share = dir =>
         {
@@ -67,7 +67,7 @@ public class MainActivity : AvaloniaMainActivity<App>
         {
             SealOrder.Static.Static.LoadedFile = (Intent.Data.Path!, () =>
             {
-                var stream = new FileInputStream(ContentResolver.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
+                var stream = new FileInputStream(ContentResolver!.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
 
                 var bytes = new byte[stream.Available()];
 
