@@ -41,6 +41,8 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
 
+        System.IO.Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "public/temp"));
+
         SealOrder.Static.Static.Share = dir =>
         {
             try
@@ -51,9 +53,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 
-                intent.SetType("application/octet-stream");
-
-                intent.PutExtra(Intent.ExtraStream, uri);
+                intent.SetDataAndType(uri, "application/octet-stream");
 
                 StartActivity(Intent.CreateChooser(intent, string.Empty));
             }

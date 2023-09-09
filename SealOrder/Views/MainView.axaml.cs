@@ -12,9 +12,6 @@ public partial class MainView : UserControl
 
     private async void Load(object sender, RoutedEventArgs e)
     {
-        if (!Path.Exists(Path.Combine(LocalCacheDirectory, "temp")))
-            Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "temp"));
-
         if (Access is null)
             await MessageBoxManager.GetMessageBoxStandard(string.Empty, "未保存通行等级！").ShowAsync();
 
@@ -48,11 +45,6 @@ public partial class MainView : UserControl
                 {
                     await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
                 }
-    }
-
-    private void Unload(object sender, RoutedEventArgs e)
-    {
-        Directory.Delete(Path.Combine(LocalCacheDirectory, "temp"), true);
     }
 
     private void Loading(object sender, RoutedEventArgs e)
@@ -167,10 +159,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".pdf", ".mdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".pdf", ".mdf")), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".pdf", ".mdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".pdf", ".mdf")));
 
                                 else
                                     PlatformNotSupport();
@@ -254,10 +246,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "temp", file.Name.Replace(".mdf", ".pdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")));
 
                                 else
                                     PlatformNotSupport();
