@@ -5,7 +5,7 @@
 	<application android:label="SealOrder" android:icon="@drawable/Icon">
 		<provider
 			android:name="androidx.core.content.FileProvider"
-			android:authorities="${applicationId}"
+			android:authorities="com.Mlinetles.SealOrder"
             android:exported="false"
             android:grantUriPermissions="true">
 			<meta-data
