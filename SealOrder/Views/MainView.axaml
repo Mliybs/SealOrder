@@ -13,9 +13,7 @@
                   <MenuItem Header="关于" Click='About' />
                   <MenuItem Header="加密" Click='Encrypt' />
                   <MenuItem Header="解密" Click='Decrypt' />
-                  <MenuItem Header="导入通行等级" StaysOpenOnClick="True">
-                    <TextBox LostFocus='Loading' Watermark='关闭菜单以保存' />
-                  </MenuItem>
+                  <MenuItem Header="导入通行等级" Click="Loading" />
                 </MenuItem>
               </Menu>
               <Grid>

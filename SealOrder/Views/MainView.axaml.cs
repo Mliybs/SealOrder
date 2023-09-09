@@ -47,51 +47,48 @@ public partial class MainView : UserControl
                 }
     }
 
-    private void Loading(object sender, RoutedEventArgs e)
+    private async void Loading(object sender, RoutedEventArgs e)
     {
-        if (sender is TextBox box)
+        var text = await GetMessageBoxCustom(new(), new()
         {
-            if (box.Text is not null)
+            Content = new InputBox("请输入通行等级")
+        }).ShowAsync();
+
+        var access = new JsonObject();
+
+        foreach (var item in text.Split(' '))
+        {
+            switch (item.Split('：'))
             {
-                var access = new JsonObject();
+                case ["等级", var value]:
 
-                foreach (var item in box.Text.Split(' '))
-                {
-                    switch (item.Split('：'))
-                    {
-                        case ["等级", var value]:
+                    access["access"] = value;
+                
+                    break;
+                    
+                case ["密钥", var value]:
 
-                            access["access"] = value;
-                        
-                            break;
-                            
-                        case ["密钥", var value]:
+                    access["key"] = value;
+                
+                    break;
+                    
+                case ["向量", var value]:
 
-                            access["key"] = value;
-                        
-                            break;
-                            
-                        case ["向量", var value]:
+                    access["iv"] = value;
+                
+                    break;
 
-                            access["iv"] = value;
-                        
-                            break;
+                default:
 
-                        default:
+                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "通行等级不合法！").ShowAsync();
 
-                            MessageBoxManager.GetMessageBoxStandard(string.Empty, "通行等级不合法！").ShowAsync();
-
-                            break;
-                    }
-                }
-
-                File.WriteAllTextAsync(Path.Combine(DataDirectory, "access.json"), access.ToString());
-
-                MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
-
-                box.Text = null;
+                    break;
             }
         }
+
+        File.WriteAllText(Path.Combine(DataDirectory, "access.json"), access.ToString());
+
+        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
     }
 
     private async void Encrypt(object sender, RoutedEventArgs e)
