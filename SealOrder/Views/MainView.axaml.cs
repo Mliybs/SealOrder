@@ -49,51 +49,50 @@ public partial class MainView : UserControl
 
     private async void Loading(object sender, RoutedEventArgs e)
     {
-        try{
         var text = await GetMessageBoxCustom(new(), new()
         {
-            Content = new InputBox("请输入通行等级")
-        }).ShowAsync();
+            Content = new InputBox("请输入通行等级"),
 
-        var access = new JsonObject();
+            Name = "InputBox"
+        }).ShowAsPopupAsync(this);
 
-        foreach (var item in text.Split(' '))
+        if (text is not null)
         {
-            switch (item.Split('：'))
+            var access = new JsonObject();
+
+            foreach (var item in text.Split(' '))
             {
-                case ["等级", var value]:
+                switch (item.Split('：'))
+                {
+                    case ["等级", var value]:
 
-                    access["access"] = value;
-                
-                    break;
-                    
-                case ["密钥", var value]:
+                        access["access"] = value;
 
-                    access["key"] = value;
-                
-                    break;
-                    
-                case ["向量", var value]:
+                        break;
 
-                    access["iv"] = value;
-                
-                    break;
+                    case ["密钥", var value]:
 
-                default:
+                        access["key"] = value;
 
-                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "通行等级不合法！").ShowAsync();
+                        break;
 
-                    break;
+                    case ["向量", var value]:
+
+                        access["iv"] = value;
+
+                        break;
+
+                    default:
+
+                        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "通行等级不合法！").ShowAsync();
+
+                        break;
+                }
             }
-        }
 
-        File.WriteAllText(Path.Combine(DataDirectory, "access.json"), access.ToString());
+            File.WriteAllText(Path.Combine(DataDirectory, "access.json"), access.ToString());
 
-        await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
-        }
-        catch (Exception exc)
-        {
-            await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
+            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
         }
     }
 

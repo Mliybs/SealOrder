@@ -57,7 +57,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.PutExtra(Intent.ExtraStream, uri);
 
-                StartActivity(intent);
+                StartActivity(Intent.CreateChooser(intent));
             }
             catch (System.Exception e)
             {

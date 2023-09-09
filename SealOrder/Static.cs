@@ -13,6 +13,8 @@ public static class Static
 
         @params.WindowStartupLocation = windowStartupLocation;
 
+        @params.ButtonDefinitions = Array.Empty<MsBox.Avalonia.Models.ButtonDefinition>();
+
         var msBoxCustomViewModel = new MsBox.Avalonia.ViewModels.MsBoxCustomViewModel(@params);
 
         view.DataContext = msBoxCustomViewModel;

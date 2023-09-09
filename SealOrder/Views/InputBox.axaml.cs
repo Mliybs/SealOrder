@@ -20,11 +20,11 @@ public partial class InputBox : UserControl
 
     private void Close(object sender, RoutedEventArgs e)
     {
-        if (Parent is MsBox.Avalonia.Controls.MsBoxCustomView view)
+        if ((Parent is MsBox.Avalonia.Controls.MsBoxCustomView view) && (view.DataContext is MsBox.Avalonia.ViewModels.MsBoxCustomViewModel model))
         {
             view.SetButtonResult(this.GetControl<TextBox>("Input").Text);
 
-            view.Close();
+            model.ButtonClick(string.Empty);
         }
     }
 }
