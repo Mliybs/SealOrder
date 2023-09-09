@@ -224,6 +224,11 @@ public partial class MainView : UserControl
                                 {
                                     Name = "保存"
                                 },
+
+                                new()
+                                {
+                                    Name = "打开"
+                                },
                                 
                                 new()
                                 {
@@ -235,11 +240,6 @@ public partial class MainView : UserControl
                                 new()
                                 {
                                     Name = "保存"
-                                },
-
-                                new()
-                                {
-                                    Name = "打开"
                                 },
                                 
                                 new()
