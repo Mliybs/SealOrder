@@ -55,7 +55,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.SetDataAndType(uri, "application/octet-stream");
 
-                StartActivity(Intent.CreateChooser(intent, null));
+                StartActivity(Intent.CreateChooser(intent, null as string));
             }
             catch (System.Exception e)
             {
