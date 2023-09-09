@@ -55,7 +55,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.SetType("application/*");
 
-                intent.PutExtra(Intent.ExtraStream, uri)
+                intent.PutExtra(Intent.ExtraStream, uri);
 
                 StartActivity(intent);
             }
