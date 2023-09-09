@@ -57,7 +57,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.PutExtra(Intent.ExtraStream, uri);
 
-                StartActivity(Intent.CreateChooser(intent, "application/*"));
+                StartActivity(Intent.CreateChooser(intent, "请选择分享至的软件"));
             }
             catch (System.Exception e)
             {
