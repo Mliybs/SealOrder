@@ -49,9 +49,11 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
 
+                System.IO.File.WriteAllLines(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "ouo.log"), new[] { uri.Path, uri.EncodedPath, uri.ToString() });
+
                 var intent = new Intent();
 
-                intent.SetAction("Intent.ACTION_SEND");
+                intent.SetAction(Intent.ActionSend);
 
                 intent.SetDataAndType(uri, "application/octet-stream");
 
