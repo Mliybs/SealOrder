@@ -53,7 +53,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 var intent = new Intent("Intent.ACTION_SEND");
 
-                intent.SetDataAndType(uri, "application/octet-stream");
+                intent.SetDataAndType(uri, "application/pdf");
 
                 intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 
