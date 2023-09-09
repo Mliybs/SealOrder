@@ -49,15 +49,17 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var uri = FileProvider.GetUriForFile(this, PackageName, new Java.IO.File(dir));
 
-                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "uri.log"), uri.EncodedPath);
+                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "uri.log"), uri.Path);
 
-                var intent = new Intent("Intent.ACTION_SEND");
+                var intent = new Intent();
 
-                intent.SetDataAndType(uri, "application/pdf");
+                intent.SetAction("Intent.ACTION_SEND");
+
+                intent.SetDataAndType(uri, "application/octet-stream");
+
+                intent.AddFlags(Intent.FlagActivityNewTask);
 
                 intent.AddFlags(ActivityFlags.GrantReadUriPermission);
-
-                intent.AddFlags(ActivityFlags.GrantWriteUriPermission);
 
                 StartActivity(Intent.CreateChooser(intent, "请选择分享至的软件"));
             }
