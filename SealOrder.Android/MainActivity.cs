@@ -59,7 +59,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             }
             catch (System.Exception e)
             {
-                SealOrder.Static.Static.PlatformNotSupport(e.Message);
+                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "error.log"), e.Message);
             }
         };
 
