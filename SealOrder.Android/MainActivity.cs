@@ -41,7 +41,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
 
-        System.IO.Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "public/temp"));
+        System.IO.Directory.CreateDirectory(System.IO.Path.Combine(LocalCacheDirectory, "public/temp"));
 
         SealOrder.Static.Static.Share = dir =>
         {
