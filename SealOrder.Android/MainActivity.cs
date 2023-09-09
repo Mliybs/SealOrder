@@ -57,7 +57,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.SetDataAndType(uri, "application/octet-stream");
 
-                intent.AddFlags(ActivityFlags.FlagActivityNewTask);
+                intent.AddFlags(ActivityFlags.NewTask);
 
                 intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 
