@@ -49,9 +49,11 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var uri = FileProvider.GetUriForFile(this, PackageName, new Java.IO.File(dir));
 
+                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "uri.log"), uri.EncodedPath);
+
                 var intent = new Intent("Intent.ACTION_SEND");
 
-                intent.SetType("application/*");
+                intent.SetType("application/octet-stream");
 
                 intent.PutExtra(Intent.ExtraStream, uri);
 
