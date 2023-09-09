@@ -58,6 +58,7 @@ public partial class MainView : UserControl
 
         if (text is not null)
         {
+            try{
             var access = new JsonObject();
 
             foreach (var item in text.Split(' '))
@@ -93,6 +94,11 @@ public partial class MainView : UserControl
             File.WriteAllText(Path.Combine(DataDirectory, "access.json"), access.ToString());
 
             await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
+            }
+            catch (Exception exc)
+            {
+                File.WriteAllText(Path.Combine(LocalCacheDirectory, "erroe.log"), exc.Message);
+            }
         }
     }
 
