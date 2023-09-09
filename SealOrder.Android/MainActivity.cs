@@ -60,9 +60,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
             var intent = new Intent(Intent.ActionView);
 
-            intent.AddFlags(ActivityFlags.NewTask);
+            intent.SetType("application/pdf");
 
-            intent.SetDataAndType(uri, "application/pdf");
+            intent.PutExtra(Intent.ExtraStream, uri);
 
             StartActivity(intent);
         };
