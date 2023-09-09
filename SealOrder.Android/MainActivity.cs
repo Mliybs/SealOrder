@@ -49,15 +49,15 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
 
-                System.IO.File.WriteAllLines(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "ouo.log"), new[] { uri.Path, uri.EncodedPath, uri.ToString() });
-
                 var intent = new Intent();
 
                 intent.SetAction(Intent.ActionSend);
 
-                intent.SetDataAndType(uri, "application/octet-stream");
+                intent.SetDataType(uri, "application/octet-stream");
 
-                StartActivity(Intent.CreateChooser(intent, null as string));
+                intent.PutExtra(Intent.ExtraStream, uri);
+
+                StartActivity(Intent.CreateChooser(intent, "请选择分享至的软件"));
             }
             catch (System.Exception e)
             {
