@@ -24,7 +24,7 @@ public partial class InputBox : UserControl
         {
             view.SetButtonResult(this.GetControl<TextBox>("Input").Text);
 
-            model.ButtonClick(string.Empty);
+            view.Close();
         }
     }
 }
