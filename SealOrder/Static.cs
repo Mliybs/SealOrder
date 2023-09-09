@@ -5,7 +5,7 @@ namespace SealOrder.Static;
 
 public static class Static
 {
-    public static void PlatformNotSupport() => MessageBoxManager.GetMessageBoxStandard(string.Empty, "此平台不支持该功能！");
+    public static void PlatformNotSupport(string? msg = null) => MessageBoxManager.GetMessageBoxStandard(string.Empty, msg ?? "此平台不支持该功能！");
 
     public static MsBox.Avalonia.Base.IMsBox<string> GetMessageBoxCustom(MsBox.Avalonia.Dto.MessageBoxCustomParams @params, MsBox.Avalonia.Controls.MsBoxCustomView view, MsBox.Avalonia.Enums.Icon icon = MsBox.Avalonia.Enums.Icon.None, WindowStartupLocation windowStartupLocation = WindowStartupLocation.CenterScreen)
     {
