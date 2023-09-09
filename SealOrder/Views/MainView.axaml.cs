@@ -12,7 +12,8 @@ public partial class MainView : UserControl
 
     private async void Load(object sender, RoutedEventArgs e)
     {
-        Directory.Delete(Path.Combine(LocalCacheDirectory, "public/temp"), true);
+        if (Directory.Exists(Path.Combine(LocalCacheDirectory, "public/temp")))
+            Directory.Delete(Path.Combine(LocalCacheDirectory, "public/temp"), true);
 
         Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "public/temp"));
 
