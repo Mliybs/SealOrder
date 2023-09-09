@@ -49,13 +49,15 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var uri = FileProvider.GetUriForFile(this, PackageName, new Java.IO.File(dir));
 
+                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "uri.log"), uri.Path);
+
                 var intent = new Intent();
 
                 intent.SetAction("Intent.ACTION_SEND");
 
-                intent.SetType("application/octet-stream");
+                intent.SetType("text/plain");
 
-                intent.PutExtra(Intent.ExtraStream, uri)
+                intent.PutExtra(Intent.ExtraText, "麻了");
 
                 StartActivity(Intent.CreateChooser(intent, "请选择分享至的软件"));
             }
