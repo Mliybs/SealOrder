@@ -162,7 +162,7 @@ public partial class MainView : UserControl
                                 File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".pdf", ".mdf")), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine("/public/temp", file.Name.Replace(".pdf", ".mdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".pdf", ".mdf")));
 
                                 else
                                     PlatformNotSupport();
@@ -246,10 +246,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine("/public/temp", file.Name.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine("/public/temp", file.Name.Replace(".mdf", ".pdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")));
 
                                 else
                                     PlatformNotSupport();

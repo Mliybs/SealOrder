@@ -53,9 +53,11 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 var intent = new Intent("Intent.ACTION_SEND");
 
-                intent.SetType("application/octet-stream");
+                intent.SetDataAndType(uri, "application/octet-stream");
 
-                intent.PutExtra(Intent.ExtraStream, uri);
+                intent.AddFlags(Intent.ActivityFlags.GrantReadUriPermission);
+
+                intent.AddFlags(Intent.ActivityFlags.GrantWriteUriPermission);
 
                 StartActivity(Intent.CreateChooser(intent, "请选择分享至的软件"));
             }
