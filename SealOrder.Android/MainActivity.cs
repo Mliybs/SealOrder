@@ -53,7 +53,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 intent.SetAction(Intent.ActionSend);
 
-                intent.SetDataType(uri, "application/octet-stream");
+                intent.SetType("application/octet-stream");
 
                 intent.PutExtra(Intent.ExtraStream, uri);
 
