@@ -51,8 +51,6 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 var intent = new Intent("Intent.ACTION_SEND");
 
-                intent.AddFlags(ActivityFlags.GrantReadUriPermission);
-
                 intent.SetType("application/*");
 
                 intent.PutExtra(Intent.ExtraStream, uri);
