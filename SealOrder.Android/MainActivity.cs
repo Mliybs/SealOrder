@@ -43,24 +43,17 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.Share = dir =>
         {
-            try
-            {
-                var uri = FileProvider.GetUriForFile(this, PackageName, new Java.IO.File(dir));
+            var uri = FileProvider.GetUriForFile(this, PackageName, new Java.IO.File(dir));
 
-                var intent = new Intent("Intent.ACTION_SEND");
+            var intent = new Intent("Intent.ACTION_SEND");
 
-                intent.AddFlags(ActivityFlags.GrantReadUriPermission);
+            intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 
-                intent.SetType("application/octet-stream");
+            intent.SetType("application/octet-stream");
 
-                intent.PutExtra(Intent.ExtraStream, uri);
+            intent.PutExtra(Intent.ExtraStream, uri);
 
-                StartActivity(Intent.CreateChooser(intent, string.Empty));
-            }
-            catch (System.Exception e)
-            {
-                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "error.log"), e.Message);
-            }
+            StartActivity();
         };
 
         if (Intent?.Data is not null)
