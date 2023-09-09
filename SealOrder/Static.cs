@@ -87,6 +87,8 @@ public static class Static
 
     public static Action<string>? Share { get; set; }
 
+    public static Action<string>? Open { get; set; }
+
     public const string about = """
         MIT License
 

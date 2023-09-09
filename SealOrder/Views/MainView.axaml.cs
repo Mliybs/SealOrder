@@ -12,6 +12,10 @@ public partial class MainView : UserControl
 
     private async void Load(object sender, RoutedEventArgs e)
     {
+        Directory.Delete(Path.Combine(LocalCacheDirectory, "public/temp"));
+
+        Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "public/temp"));
+
         if (Access is null)
             await MessageBoxManager.GetMessageBoxStandard(string.Empty, "未保存通行等级！").ShowAsync();
 
@@ -212,11 +216,29 @@ public partial class MainView : UserControl
 
                             WindowStartupLocation = WindowStartupLocation.CenterScreen,
 
-                            ButtonDefinitions = new MsBox.Avalonia.Models.ButtonDefinition[]
+                            ButtonDefinitions = file.Name.EndsWith(".mdf") && Open is not null
+                            ? new MsBox.Avalonia.Models.ButtonDefinition[]
                             {
                                 new()
                                 {
                                     Name = "保存"
+                                },
+                                
+                                new()
+                                {
+                                    Name = "分享"
+                                }
+                            }
+                            : new MsBox.Avalonia.Models.ButtonDefinition[]
+                            {
+                                new()
+                                {
+                                    Name = "保存"
+                                },
+
+                                new()
+                                {
+                                    Name = "打开"
                                 },
                                 
                                 new()
@@ -253,6 +275,14 @@ public partial class MainView : UserControl
 
                                 else
                                     PlatformNotSupport();
+
+                                break;
+
+                            case "打开":
+
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")), bytes);
+
+                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")));
 
                                 break;
                         }

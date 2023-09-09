@@ -41,28 +41,28 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
 
-        System.IO.Directory.CreateDirectory(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "public/temp"));
-
         SealOrder.Static.Static.Share = dir =>
         {
-            try
-            {
-                var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
+            var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
 
-                var intent = new Intent();
+            var intent = new Intent(Intent.ActionSend);
 
-                intent.SetAction(Intent.ActionSend);
+            intent.SetType("application/octet-stream");
 
-                intent.SetType("application/octet-stream");
+            intent.PutExtra(Intent.ExtraStream, uri);
 
-                intent.PutExtra(Intent.ExtraStream, uri);
+            StartActivity(Intent.CreateChooser(intent, null as string));
+        };
 
-                StartActivity(Intent.CreateChooser(intent, "请选择分享至的软件"));
-            }
-            catch (System.Exception e)
-            {
-                System.IO.File.WriteAllText(System.IO.Path.Combine(ExternalCacheDir!.AbsolutePath, "error.log"), e.Message);
-            }
+        SealOrder.Static.Static.Open = dir =>
+        {
+            var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
+
+            var intent = new Intent(Intent.ActionView);
+
+            intent.SetDataAndType(uri, "application/pdf");
+
+            StartActivity(intent);
         };
 
         if (Intent?.Data is not null)
