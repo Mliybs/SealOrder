@@ -49,6 +49,7 @@ public partial class MainView : UserControl
 
     private async void Loading(object sender, RoutedEventArgs e)
     {
+        try{
         var text = await GetMessageBoxCustom(new(), new()
         {
             Content = new InputBox("请输入通行等级")
@@ -89,6 +90,11 @@ public partial class MainView : UserControl
         File.WriteAllText(Path.Combine(DataDirectory, "access.json"), access.ToString());
 
         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "导入成功！").ShowAsync();
+        }
+        catch (Exception exc)
+        {
+            await MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
+        }
     }
 
     private async void Encrypt(object sender, RoutedEventArgs e)
