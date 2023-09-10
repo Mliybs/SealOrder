@@ -28,18 +28,81 @@ public partial class MainView : UserControl
                     {
                         var bytes = AESDecrypt(LoadedFile.Value.Bytes(), JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
 
-                        var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                        switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
-                            SuggestedFileName = LoadedFile.Value.Path[(LoadedFile.Value.Path.LastIndexOf('/') + 1)..].Replace(".mdf", ".pdf")
-                        });
+                            ContentMessage = "请选择保存或分享该文件",
 
-                        if (save is not null)
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+
+                            ButtonDefinitions = LoadedFile.Value.Path.EndsWith(".mdf") && Open is not null
+                            ? new MsBox.Avalonia.Models.ButtonDefinition[]
+                            {
+                                new()
+                                {
+                                    Name = "保存"
+                                },
+
+                                new()
+                                {
+                                    Name = "打开"
+                                },
+                                
+                                new()
+                                {
+                                    Name = "分享"
+                                }
+                            }
+                            : new MsBox.Avalonia.Models.ButtonDefinition[]
+                            {
+                                new()
+                                {
+                                    Name = "保存"
+                                },
+                                
+                                new()
+                                {
+                                    Name = "分享"
+                                }
+                            }
+                        }).ShowAsync())
                         {
-                            using var stream = await save.OpenWriteAsync();
+                            case "保存":
 
-                            stream.Write(bytes);
+                                var save = await level.StorageProvider.SaveFilePickerAsync(new()
+                                {
+                                    SuggestedFileName = LoadedFile.Value.Path.Replace(".mdf", ".pdf")
+                                });
 
-                            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                                if (save is not null)
+                                {
+                                    using var write = await save.OpenWriteAsync();
+                                    
+                                    write.Write(bytes);
+
+                                    await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
+                                }
+
+                                break;
+
+                            case "分享":
+
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")), bytes);
+
+                                if (Share is not null)
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")));
+
+                                else
+                                    PlatformNotSupport();
+
+                                break;
+
+                            case "打开":
+
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")), bytes);
+
+                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")));
+
+                                break;
                         }
                     }
 
