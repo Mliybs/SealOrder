@@ -26,6 +26,8 @@ public partial class MainView : UserControl
                 {
                     if (TopLevel.GetTopLevel(this) is not null and var level)
                     {
+                        var name = LoadedFile.Value.Path[(LoadedFile.Value.Path.LastIndexOf('/') + 1)..];
+
                         var bytes = AESDecrypt(LoadedFile.Value.Bytes(), JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
@@ -34,7 +36,7 @@ public partial class MainView : UserControl
 
                             WindowStartupLocation = WindowStartupLocation.CenterScreen,
 
-                            ButtonDefinitions = LoadedFile.Value.Path.EndsWith(".mdf") && Open is not null
+                            ButtonDefinitions = name.EndsWith(".mdf") && Open is not null
                             ? new MsBox.Avalonia.Models.ButtonDefinition[]
                             {
                                 new()
@@ -70,7 +72,7 @@ public partial class MainView : UserControl
 
                                 var save = await level.StorageProvider.SaveFilePickerAsync(new()
                                 {
-                                    SuggestedFileName = LoadedFile.Value.Path.Replace(".mdf", ".pdf")
+                                    SuggestedFileName = name.Replace(".mdf", ".pdf")
                                 });
 
                                 if (save is not null)
@@ -86,10 +88,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")));
 
                                 else
                                     PlatformNotSupport();
@@ -98,9 +100,9 @@ public partial class MainView : UserControl
 
                             case "打开":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")), bytes);
 
-                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", LoadedFile.Value.Path.Replace(".mdf", ".pdf")));
+                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")));
 
                                 break;
                         }
