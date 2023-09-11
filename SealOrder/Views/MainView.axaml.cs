@@ -30,14 +30,6 @@ public partial class MainView : UserControl
 
                         var access = JsonDocument.Parse(Access).RootElement;
 
-                        var index = await GetMessageBoxCustom(new(), new()
-                        {
-                            Content = new MenuBox("请选择通行等级", access.EnumerateObject().Select(x => x.Name))
-                        }).ShowAsync();
-
-                        if (index is null)
-                            return;
-
                         Func<byte[], string, string, byte[]>? operate = null;
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
@@ -72,6 +64,14 @@ public partial class MainView : UserControl
 
                                 break;
                         }
+
+                        var index = await GetMessageBoxCustom(new(), new()
+                        {
+                            Content = new MenuBox("请选择通行等级", access.EnumerateObject().Select(x => x.Name))
+                        }).ShowAsync();
+
+                        if (index is null)
+                            return;
 
                         var bytes = operate!.Invoke(LoadedFile.Value.Bytes(), access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
