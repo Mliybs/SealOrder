@@ -38,7 +38,42 @@ public partial class MainView : UserControl
                         if (index is null)
                             return;
 
-                        var bytes = AESDecrypt(LoadedFile.Value.Bytes(), access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
+                        Func<byte[], string, string, byte[]>? operate = null;
+
+                        switch (await MessageBoxManager.GetMessageBoxCustom(new()
+                        {
+                            ContentMessage = "请选择加密或解密该文件",
+
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+
+                            ButtonDefinitions = new MsBox.Avalonia.Models.ButtonDefinition[]
+                            {
+                                new()
+                                {
+                                    Name = "加密"
+                                },
+                                
+                                new()
+                                {
+                                    Name = "解密"
+                                }
+                            }
+                        }).ShowAsync())
+                        {
+                            case "加密":
+
+                                operate = AESEncrypt;
+
+                                break;
+
+                            case "解密":
+
+                                operate = AESDecrypt;
+
+                                break;
+                        }
+
+                        var bytes = operate!.Invoke(LoadedFile.Value.Bytes(), access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
