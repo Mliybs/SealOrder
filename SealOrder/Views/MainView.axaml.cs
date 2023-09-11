@@ -261,6 +261,8 @@ public partial class MainView : UserControl
 
                         var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
+                        await Task.Delay(10);
+
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
                             ContentMessage = "请选择保存或分享该文件",
@@ -357,6 +359,8 @@ public partial class MainView : UserControl
                             return;
 
                         var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
+
+                        await Task.Delay(10);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
