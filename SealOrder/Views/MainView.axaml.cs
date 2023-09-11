@@ -223,6 +223,10 @@ public partial class MainView : UserControl
             access[name]!["iv"] = iv;
 
             await File.WriteAllTextAsync(Path.Combine(DataDirectory, "access.json"), access.ToString());
+
+            await Task.Delay(10);
+
+            await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功！").ShowAsync();
         }
     }
 
