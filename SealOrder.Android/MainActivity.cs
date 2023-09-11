@@ -20,7 +20,7 @@ namespace SealOrder.Android;
 IntentFilter(
     new[] { "android.intent.action.VIEW" },
     Categories = new[] { "android.intent.category.DEFAULT" },
-    DataMimeType = "application/octet-stream"
+    DataMimeType = "application/*"
 )]
 public class MainActivity : AvaloniaMainActivity<App>
 {
