@@ -83,7 +83,7 @@ public static class Static
 
     public static (string Path, Func<byte[]> Bytes)? LoadedFile { get; set; }
 
-    public static string? Access { get => File.Exists(Path.Combine(DataDirectory, "access.json")) ? File.ReadAllText(Path.Combine(DataDirectory, "access.json")) : null; }
+    public static string? Access => File.Exists(Path.Combine(DataDirectory, "access.json")) ? File.ReadAllText(Path.Combine(DataDirectory, "access.json")) : null;
 
     public static Action<string>? Share { get; set; }
 

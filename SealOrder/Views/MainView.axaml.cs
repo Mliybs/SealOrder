@@ -28,7 +28,17 @@ public partial class MainView : UserControl
                     {
                         var name = LoadedFile.Value.Path[(LoadedFile.Value.Path.LastIndexOf('/') + 1)..];
 
-                        var bytes = AESDecrypt(LoadedFile.Value.Bytes(), JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
+                        var access = JsonDocument.Parse(Access).RootElement;
+
+                        var index = await GetMessageBoxCustom(new(), new()
+                        {
+                            Content = new MenuBox("请选择通行等级", access.EnumerateObject().Select(x => x.Name))
+                        }).ShowAsync();
+
+                        if (index is null)
+                            return;
+
+                        var bytes = AESDecrypt(LoadedFile.Value.Bytes(), access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -122,13 +132,17 @@ public partial class MainView : UserControl
         var text = await GetMessageBoxCustom(new(), new()
         {
             Content = new InputBox("请输入通行等级"),
-
-            Name = "InputBox"
         }).ShowAsync();
 
         if (text is not null)
         {
-            var access = new JsonObject();
+            var access = JsonNode.Parse(Access ?? "{}")!;
+
+            string? name = null;
+
+            string? key = null;
+
+            string? iv = null;
 
             foreach (var item in text.Split(' '))
             {
@@ -136,19 +150,19 @@ public partial class MainView : UserControl
                 {
                     case ["等级", var value]:
 
-                        access["access"] = value;
+                        name = value;
 
                         break;
 
                     case ["密钥", var value]:
 
-                        access["key"] = value;
+                        key = value;
 
                         break;
 
                     case ["向量", var value]:
 
-                        access["iv"] = value;
+                        iv = value;
 
                         break;
 
@@ -156,9 +170,22 @@ public partial class MainView : UserControl
 
                         await MessageBoxManager.GetMessageBoxStandard(string.Empty, "通行等级不合法！").ShowAsync();
 
-                        break;
+                        return;
                 }
             }
+
+            if (name is null || key is null || iv is null)
+            {
+                await MessageBoxManager.GetMessageBoxStandard(string.Empty, "通行等级不合法！").ShowAsync();
+
+                return;
+            }
+
+            access[name] = new JsonObject();
+
+            access[name]!["key"] = key;
+
+            access[name]!["iv"] = iv;
 
             await File.WriteAllTextAsync(Path.Combine(DataDirectory, "access.json"), access.ToString());
         }
@@ -187,7 +214,17 @@ public partial class MainView : UserControl
 
                         stream.Read(buffer);
 
-                        var bytes = AESEncrypt(buffer, JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
+                        var access = JsonDocument.Parse(Access).RootElement;
+
+                        var index = await GetMessageBoxCustom(new(), new()
+                        {
+                            Content = new MenuBox("请选择通行等级", access.EnumerateObject().Select(x => x.Name))
+                        }).ShowAsync();
+
+                        if (index is null)
+                            return;
+
+                        var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -274,7 +311,17 @@ public partial class MainView : UserControl
 
                         stream.Read(buffer);
 
-                        var bytes = AESDecrypt(buffer, JsonDocument.Parse(Access).RootElement.GetProperty("key").GetString()!, JsonDocument.Parse(Access).RootElement.GetProperty("iv").GetString()!);
+                        var access = JsonDocument.Parse(Access).RootElement;
+
+                        var index = await GetMessageBoxCustom(new(), new()
+                        {
+                            Content = new MenuBox("请选择通行等级", access.EnumerateObject().Select(x => x.Name))
+                        }).ShowAsync();
+
+                        if (index is null)
+                            return;
+
+                        var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {

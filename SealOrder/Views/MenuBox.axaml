@@ -2,24 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:SealOrder.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SealOrder.Views.InputBox">
+             x:Class="SealOrder.Views.MenuBox"
+             x:DataType="vm:MenuBoxViewModel">
+  
   <Grid Margin='8'>
     <Grid.RowDefinitions>
+      <RowDefinition Height='*' />
       <RowDefinition Height='3*' />
       <RowDefinition Height='*' />
     </Grid.RowDefinitions>
 
-    <TextBox
-      Name='Input'
+    <TextBlock
+      Name='Hint'
       Grid.Row='0'
       HorizontalAlignment='Center'
       Margin='10'
+      Text='{Binding Hint}' />
+
+    <ListBox
+      Name='List'
+      Grid.Row='1'
+      HorizontalAlignment='Center'
+      Margin='10'
       MaxWidth='120'
-      TextWrapping='Wrap' />
+      BorderThickness='2'
+      CornerRadius='5'
+      ItemsSource='{Binding Items}' />
 
     <Button
-      Grid.Row='1'
+      Grid.Row='2'
       HorizontalAlignment='Right'
       Margin='10'
       Content='确认'
