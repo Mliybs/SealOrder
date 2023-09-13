@@ -19,7 +19,7 @@ public static class Static
 
         view.DataContext = msBoxCustomViewModel;
 
-        return new MsBox<MsBox.Avalonia.Controls.MsBoxCustomView,
+        return new NeoMsBox<MsBox.Avalonia.Controls.MsBoxCustomView,
         MsBox.Avalonia.ViewModels.MsBoxCustomViewModel,
         string>(view, msBoxCustomViewModel);
     }
