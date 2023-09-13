@@ -224,8 +224,6 @@ public partial class MainView : UserControl
 
             await File.WriteAllTextAsync(Path.Combine(DataDirectory, "access.json"), access.ToString());
 
-            await Task.Delay(10);
-
             await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功！").ShowAsync();
         }
     }
@@ -264,8 +262,6 @@ public partial class MainView : UserControl
                             return;
 
                         var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
-
-                        await Task.Delay(10);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -363,8 +359,6 @@ public partial class MainView : UserControl
                             return;
 
                         var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
-
-                        await Task.Delay(10);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
