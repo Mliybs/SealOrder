@@ -1,7 +1,12 @@
 using Avalonia.Diagnostics;
 using DialogHostAvalonia;
+using MsBox.Avalonia;
 using MsBox.Avalonia.Base;
 using MsBox.Avalonia.Windows;
+using MsBox.Avalonia.Controls;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
+using MsBox.Avalonia.ViewModels;
 
 namespace SealOrder.Static;
 
@@ -144,5 +149,44 @@ public class NeoMsBox<V, VM, T> : IMsBox<T>  where V : UserControl, IFullApi<T>,
     public Task<T> ShowAsPopupAsync(Window owner)
     {
         return ShowAsPopupAsync(owner as ContentControl);
+    }
+}
+
+public static class MessageBoxManager
+{
+    public static IMsBox<string> GetMessageBoxCustom(MessageBoxCustomParams @params)
+    {
+        var msBoxCustomViewModel = new MsBoxCustomViewModel(@params);
+
+        return new NeoMsBox<MsBoxCustomView, MsBoxCustomViewModel, string>(new MsBoxCustomView
+        {
+            DataContext = msBoxCustomViewModel
+        }, msBoxCustomViewModel);
+    }
+
+    public static IMsBox<ButtonResult> GetMessageBoxStandard(MessageBoxStandardParams @params)
+    {
+        var msBoxStandardViewModel = new MsBoxStandardViewModel(@params);
+
+        return new NeoMsBox<MsBoxStandardView, MsBoxStandardViewModel, ButtonResult>(new MsBoxStandardView
+        {
+            DataContext = msBoxStandardViewModel
+        }, msBoxStandardViewModel);
+    }
+
+    public static IMsBox<ButtonResult> GetMessageBoxStandard(string title, string text, ButtonEnum @enum = ButtonEnum.Ok, Icon icon = Icon.None, WindowStartupLocation windowStartupLocation = WindowStartupLocation.CenterScreen)
+    {
+        return GetMessageBoxStandard(new MessageBoxStandardParams
+        {
+            ContentTitle = title,
+
+            ContentMessage = text,
+
+            ButtonDefinitions = @enum,
+
+            Icon = icon,
+            
+            WindowStartupLocation = windowStartupLocation
+        });
     }
 }

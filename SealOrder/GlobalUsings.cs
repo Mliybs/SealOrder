@@ -49,6 +49,6 @@ global using Avalonia.ReactiveUI;
 
 global using ReactiveUI;
 
-global using MsBox.Avalonia;
+global using SealOrder.Static;
 
 global using static SealOrder.Static.Static;
