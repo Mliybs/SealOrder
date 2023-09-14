@@ -157,36 +157,33 @@ public static class MessageBoxManager
     public static IMsBox<string> GetMessageBoxCustom(MessageBoxCustomParams @params)
     {
         var msBoxCustomViewModel = new MsBoxCustomViewModel(@params);
-
-        return new NeoMsBox<MsBoxCustomView, MsBoxCustomViewModel, string>(new MsBoxCustomView
+        var msBoxCustomView = new MsBoxCustomView
         {
             DataContext = msBoxCustomViewModel
-        }, msBoxCustomViewModel);
+        };
+        return new NeoMsBox<MsBoxCustomView, MsBoxCustomViewModel, string>(msBoxCustomView, msBoxCustomViewModel);
     }
 
     public static IMsBox<ButtonResult> GetMessageBoxStandard(MessageBoxStandardParams @params)
     {
         var msBoxStandardViewModel = new MsBoxStandardViewModel(@params);
-
-        return new NeoMsBox<MsBoxStandardView, MsBoxStandardViewModel, ButtonResult>(new MsBoxStandardView
+        var msBoxStandardView = new MsBoxStandardView
         {
             DataContext = msBoxStandardViewModel
-        }, msBoxStandardViewModel);
+        };
+        return new NeoMsBox<MsBoxStandardView, MsBoxStandardViewModel, ButtonResult>(msBoxStandardView,
+            msBoxStandardViewModel);
     }
 
-    public static IMsBox<ButtonResult> GetMessageBoxStandard(string title, string text, ButtonEnum @enum = ButtonEnum.Ok, Icon icon = Icon.None, WindowStartupLocation windowStartupLocation = WindowStartupLocation.CenterScreen)
-    {
-        return GetMessageBoxStandard(new MessageBoxStandardParams
+    public static IMsBox<ButtonResult> GetMessageBoxStandard(string title, string text,
+        ButtonEnum @enum = ButtonEnum.Ok, Icon icon = Icon.None,
+        WindowStartupLocation windowStartupLocation = WindowStartupLocation.CenterScreen) =>
+        GetMessageBoxStandard(new MessageBoxStandardParams
         {
             ContentTitle = title,
-
             ContentMessage = text,
-
             ButtonDefinitions = @enum,
-
             Icon = icon,
-            
             WindowStartupLocation = windowStartupLocation
         });
-    }
 }
