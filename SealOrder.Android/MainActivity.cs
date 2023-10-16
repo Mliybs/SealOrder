@@ -102,7 +102,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             }
             catch (Excpetion e)
             {
-                MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
+                SealOrder.Static.MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
             }
         };
 
