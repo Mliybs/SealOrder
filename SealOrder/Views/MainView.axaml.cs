@@ -1,5 +1,6 @@
 using System.Text.Json.Nodes;
 using Avalonia.Controls;
+using DynamicData;
 
 namespace SealOrder.Views;
 
@@ -30,7 +31,7 @@ public partial class MainView : UserControl
 
                         var access = JsonDocument.Parse(Access).RootElement;
 
-                        Func<byte[], string, string, byte[]>? operate = null;
+                        Func<byte[], string, string, Task<byte[]>>? operate = null;
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -73,7 +74,7 @@ public partial class MainView : UserControl
                         if (index is null)
                             return;
 
-                        var bytes = operate!.Invoke(LoadedFile.Value.Bytes(), access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
+                        var bytes = await operate!.Invoke(LoadedFile.Value.Bytes(), access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -117,7 +118,7 @@ public partial class MainView : UserControl
 
                                 var save = await level.StorageProvider.SaveFilePickerAsync(new()
                                 {
-                                    SuggestedFileName = name.Replace(".mdf", ".pdf")
+                                    SuggestedFileName = name.Replace(".mnd", string.Empty)
                                 });
 
                                 if (save is not null)
@@ -133,10 +134,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mnd", string.Empty)), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mnd", string.Empty)));
 
                                 else
                                     PlatformNotSupport();
@@ -145,9 +146,9 @@ public partial class MainView : UserControl
 
                             case "打开":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mnd", string.Empty)), bytes);
 
-                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mdf", ".pdf")));
+                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", name.Replace(".mnd", string.Empty)));
 
                                 break;
                         }
@@ -261,7 +262,7 @@ public partial class MainView : UserControl
                         if (index is null)
                             return;
 
-                        var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
+                        var bytes = await AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -287,7 +288,7 @@ public partial class MainView : UserControl
 
                                 var save = await level.StorageProvider.SaveFilePickerAsync(new()
                                 {
-                                    SuggestedFileName = file.Name.Replace(".pdf", ".mdf")
+                                    SuggestedFileName = file.Name + "mnd"
                                 });
 
                                 if (save is not null)
@@ -303,10 +304,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".pdf", ".mdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name + "mnd"), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".pdf", ".mdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name + "mnd"));
 
                                 else
                                     PlatformNotSupport();
@@ -358,7 +359,7 @@ public partial class MainView : UserControl
                         if (index is null)
                             return;
 
-                        var bytes = AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
+                        var bytes = await AESDecrypt(buffer, access.GetProperty(index).GetProperty("key").GetString()!, access.GetProperty(index).GetProperty("iv").GetString()!);
 
                         switch (await MessageBoxManager.GetMessageBoxCustom(new()
                         {
@@ -402,7 +403,7 @@ public partial class MainView : UserControl
 
                                 var save = await level.StorageProvider.SaveFilePickerAsync(new()
                                 {
-                                    SuggestedFileName = file.Name.Replace(".mdf", ".pdf")
+                                    SuggestedFileName = file.Name.Replace(".mnd", string.Empty)
                                 });
 
                                 if (save is not null)
@@ -418,10 +419,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mnd", string.Empty)), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mnd", string.Empty)));
 
                                 else
                                     PlatformNotSupport();
@@ -430,9 +431,9 @@ public partial class MainView : UserControl
 
                             case "打开":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mnd", string.Empty)), bytes);
 
-                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mdf", ".pdf")));
+                                Open!.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name.Replace(".mnd", string.Empty)));
 
                                 break;
                         }
@@ -451,48 +452,24 @@ public partial class MainView : UserControl
     private async void About(object sender, RoutedEventArgs e) =>
         await MessageBoxManager.GetMessageBoxStandard(string.Empty, about).ShowAsync();
 
-    // private void Know(object sender, RoutedEventArgs e)
-    // {
-    //     Directory.CreateDirectory(Path.Combine(LocalCacheDirectory, "114"));
+    private void ChangeView(object sender, RoutedEventArgs e)
+    {
+        if (sender is RadioButton button)
+        {
+            switch (button.Name)
+            {
+                case "Chat":
 
-    //     using var ouo = new StreamWriter(Path.Combine(LocalCacheDirectory, "114", "ouo.txt"));
+                    this.GetControl<DockPanel>("Root").Children[1] = new ChatView();
 
-    //     ouo.Write("114!");
+                    break;
 
-    //     MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalCacheDirectory).ShowAsync();
-    // }
+                case "Settings":
 
-    // private void GetCache(object sender, RoutedEventArgs e)
-    // {
-    //     MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalCacheDirectory).ShowAsync();
-    // }
+                    this.GetControl<DockPanel>("Root").Children[1] = new ChatView();
 
-    // private void GetFile(object sender, RoutedEventArgs e)
-    // {
-    //     MessageBoxManager.GetMessageBoxStandard(string.Empty, LocalFileDirectory).ShowAsync();
-    // }
-
-    // private void GetFiles(object sender, RoutedEventArgs e)
-    // {
-    //     try
-    //     {
-    //         var files = Directory.GetFiles(Path.Combine(LocalCacheDirectory, "../../com.tencent.mobileqq/Tencent/QQfile_recv"));
-
-    //         var builder = new StringBuilder();
-
-    //         for (var i = 0; i < files.Length; i++)
-    //             builder.Append(files[i]);
-
-    //         MessageBoxManager.GetMessageBoxStandard(string.Empty, builder.ToString()).ShowAsync();
-    //     }
-    //     catch (Exception exc)
-    //     {
-    //         MessageBoxManager.GetMessageBoxStandard(string.Empty, exc.Message).ShowAsync();
-    //     }
-    // }
-
-    // private void GetData(object sender, RoutedEventArgs e)
-    // {
-    //     MessageBoxManager.GetMessageBoxStandard(string.Empty, Data ?? "null").ShowAsync();
-    // }
+                    break;
+            }
+        }
+    }
 }

@@ -49,6 +49,9 @@ global using Avalonia.ReactiveUI;
 
 global using ReactiveUI;
 
+global using SocketIOClient;
+global using SocketIOClient.Transport;
+
 global using SealOrder.Static;
 
 global using static SealOrder.Static.Static;

@@ -3,26 +3,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:SealOrder.ViewModels"
+             xmlns:views="clr-namespace:SealOrder.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SealOrder.Views.MainView"
              x:DataType="vm:MainViewModel"
              Loaded='Load'>
-            <DockPanel>
-              <Menu DockPanel.Dock='Top'>
-                <MenuItem Header="菜单">
-                  <MenuItem Header="关于" Click='About' />
-                  <MenuItem Header="加密" Click='Encrypt' />
-                  <MenuItem Header="解密" Click='Decrypt' />
-                  <MenuItem Header="导入通行等级" Click="Loading" />
-                </MenuItem>
-              </Menu>
-              <Grid>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width='2*' />
-                  <ColumnDefinition Width='*' />
-                </Grid.ColumnDefinitions>
+            <DockPanel Name='Root'>
+              <Border DockPanel.Dock='Top'
+                BorderBrush="Black"
+                BorderThickness="2">
+                <Menu>
+                  <MenuItem Header="菜单">
+                    <MenuItem Header="关于" Click='About' />
+                    <MenuItem Header="加密" Click='Encrypt' />
+                    <MenuItem Header="解密" Click='Decrypt' />
+                    <MenuItem Header="导入通行等级" Click="Loading" />
+                  </MenuItem>
+                </Menu>
+              </Border>
+              
+              <Border DockPanel.Dock='Bottom'
+                BorderBrush="Black"
+                BorderThickness="2">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                  </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column='1' Text='114!' />
-              </Grid>
+                  <RadioButton
+                    Grid.Column='0'
+                    HorizontalAlignment='Center'
+                    GroupName='BottomMenu'
+                    Content='聊天'
+                    Name='Chat'
+                    IsChecked='True'/>
+                  <RadioButton
+                    Grid.Column='1'
+                    HorizontalAlignment='Center'
+                    GroupName='BottomMenu'
+                    Content='设置'
+                    Name='Settings'/>
+                </Grid>
+              </Border>
+              <views:ChatView />
             </DockPanel>
 </UserControl>

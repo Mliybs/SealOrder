@@ -1,3 +1,4 @@
+using System.Text.Json.Nodes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 
@@ -5,6 +6,42 @@ namespace SealOrder.Static;
 
 public static class Static
 {
+    public static SocketIOClient.Transport.Http.IHttpClient Client => socket.HttpClient;
+
+    public static readonly SocketIOClient.SocketIO socket = new("wss://next.mliybs.top", new()
+    {
+        Path = "/api/ws/",
+
+        Auth = new { username = GetUserOption()["Username"]?.ToString() ?? "Mliybs", token = GetUserOption()["Token"]?.ToString() ?? "L3mBrxZipgB2kPOuj8sjm" },
+
+        Transport = TransportProtocol.WebSocket
+    });
+
+    public static JsonNode GetUserOption()
+    {
+        var path = Path.Combine(DataDirectory, "option.json");
+
+        try
+        {
+            if (File.Exists(path))
+                return JsonNode.Parse(File.ReadAllText(path) ?? "{}")!;
+
+            else
+                return JsonNode.Parse("{}")!;
+        }
+        catch (JsonException)
+        {
+            var option = JsonNode.Parse("{}")!;
+
+            UpdateUserOption(option);
+
+            return option;
+        }
+    }
+
+    public static async void UpdateUserOption(JsonNode node) =>
+        await File.WriteAllTextAsync(Path.Combine(DataDirectory, "option.json"), node?.ToString());
+
     public static void PlatformNotSupport(string? msg = null) => MessageBoxManager.GetMessageBoxStandard(string.Empty, msg ?? "此平台不支持该功能！");
 
     public static MsBox.Avalonia.Base.IMsBox<string> GetMessageBoxCustom(MsBox.Avalonia.Dto.MessageBoxCustomParams @params, MsBox.Avalonia.Controls.MsBoxCustomView view, MsBox.Avalonia.Enums.Icon icon = MsBox.Avalonia.Enums.Icon.None, WindowStartupLocation windowStartupLocation = WindowStartupLocation.CenterScreen)
@@ -24,19 +61,19 @@ public static class Static
         string>(view, msBoxCustomViewModel);
     }
 
-    public static byte[] AESEncrypt(byte[] text, string key, string iv)
+    public static Task<byte[]> AESEncrypt(byte[] text, string key, string iv) => Task.Run(() =>
     {
         var cipher = CipherUtilities.GetCipher("AES/OFB/NoPadding");
 
         cipher.Init(true, new ParametersWithIV(new DesParameters(Encoding.UTF8.GetBytes(key)), Encoding.UTF8.GetBytes(iv)));
 
         return cipher.DoFinal(text);
-    }
+    });
 
-    public static byte[] AESEncrypt(string text, string key, string iv) =>
-        AESEncrypt(Encoding.UTF8.GetBytes(text), key, iv);
+    public static async Task<byte[]> AESEncrypt(string text, string key, string iv) =>
+        await AESEncrypt(Encoding.UTF8.GetBytes(text), key, iv);
 
-    public static byte[] AESDecrypt(byte[] text, string key, string iv)
+    public static Task<byte[]> AESDecrypt(byte[] text, string key, string iv) => Task.Run(() =>
     {
         var cipher = CipherUtilities.GetCipher("AES/OFB/NoPadding");
 
@@ -49,10 +86,10 @@ public static class Static
         cipher.DoFinal(rv, tam);
 
         return rv;
-    }
+    });
 
-    public static byte[] AESDecrypt(string text, string key, string iv) =>
-        AESDecrypt(Encoding.UTF8.GetBytes(text), key, iv);
+    public static async Task<byte[]> AESDecrypt(string text, string key, string iv) =>
+        await AESDecrypt(Encoding.UTF8.GetBytes(text), key, iv);
 
     private static string? dataDirectory = null;
 
@@ -89,6 +126,8 @@ public static class Static
 
     public static Action<string>? Open { get; set; }
 
+    public static Action? Notify { get; set; }
+
     public const string about = """
         MIT License
 
@@ -112,4 +151,20 @@ public static class Static
         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         SOFTWARE.
         """;
+
+    public static string ToMime(string name) => name switch
+    {
+        "txt" => "text/plain",
+        "htm" or "html" => "text/html",
+        "pdf" => "application/pdf",
+        "jpg" or "jpeg" => "image/jpeg",
+        "png" => "image/png",
+        "gif" => "image/gif",
+        "mp3" => "audio/mpeg",
+        "mp4" => "video/mp4",
+        "zip" => "application/zip",
+        "rar" => "application/rar",
+        "apk" => "application/vnd.android.package-archive",
+        _ => "application/octet-stream"
+    };
 }

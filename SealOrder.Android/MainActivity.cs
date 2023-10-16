@@ -49,7 +49,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
             intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 
-            intent.SetType("application/octet-stream");
+            intent.SetType(SealOrder.Static.Static.ToMime(dir.Replace(".mnd", string.Empty).Split('.')[^1]));
 
             intent.PutExtra(Intent.ExtraStream, uri);
 
@@ -86,5 +86,20 @@ public class MainActivity : AvaloniaMainActivity<App>
                 return bytes;
             });
         }
+
+        SealOrder.Static.Static.Notify = () =>
+        {
+            var service = GetSystemService(Context.NotificationService) as NotificationManager;
+
+            service.Notify(0, new Notification.Builder(this, "GenshinImpact")
+                .SetContentTitle("我要玩原神！")
+                .SetContentText("我云游玩原神五年了，其实，我早就是一个原友了")
+                .SetSmallIcon(Resource.Drawable.IcNotificationOverlay)
+                .Build());
+        };
+
+        // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketException));
+        
+        // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketTimeoutException));
     }
 }
