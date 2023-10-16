@@ -89,14 +89,21 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.Notify = () =>
         {
-            var service = GetSystemService(NotificationService) as NotificationManager;
+            try
+            {
+                var service = GetSystemService(NotificationService) as NotificationManager;
 
-            service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "Genshin", NotificationImportance.Default));
+                service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "Genshin", NotificationImportance.Default));
 
-            service.Notify(114514, new Notification.Builder(this, "GenshinImpact")
-                .SetContentTitle("我要玩原神！")
-                .SetContentText("我云游玩原神五年了，其实，我早就是一个原友了")
-                .Build());
+                service.Notify(114514, new Notification.Builder(this, "GenshinImpact")
+                    .SetContentTitle("我要玩原神！")
+                    .SetContentText("我云游玩原神五年了，其实，我早就是一个原友了")
+                    .Build());
+            }
+            catch (Excpetion e)
+            {
+                MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
+            }
         };
 
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketException));
