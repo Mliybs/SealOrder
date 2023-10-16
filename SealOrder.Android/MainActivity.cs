@@ -89,7 +89,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         SealOrder.Static.Static.Notify = () =>
         {
-            var service = GetSystemService(Context.NotificationService) as NotificationManager;
+            var service = GetSystemService(NotificationService) as NotificationManager;
+
+            service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "Genshin", NotificationImportance.Default));
 
             service.Notify(114514, new Notification.Builder(this, "GenshinImpact")
                 .SetContentTitle("我要玩原神！")
