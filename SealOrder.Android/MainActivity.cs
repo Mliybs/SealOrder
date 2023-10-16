@@ -98,7 +98,7 @@ public class MainActivity : AvaloniaMainActivity<App>
                 service.Notify(114514, new Notification.Builder(this, "GenshinImpact")
                     .SetContentTitle("我要玩原神！")
                     .SetContentText("我云游玩原神五年了，其实，我早就是一个原友了")
-                    .SetSmallIcon(17301595)
+                    .SetSmallIcon(Android.Graphics.Drawables.Icon.CreateWithFilePath("@drawable/icon"))
                     .Build());
             }
             catch (System.Exception e)
