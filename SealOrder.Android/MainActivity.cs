@@ -100,7 +100,7 @@ public class MainActivity : AvaloniaMainActivity<App>
                     .SetContentText("我云游玩原神五年了，其实，我早就是一个原友了")
                     .Build());
             }
-            catch (Excpetion e)
+            catch (System.Excpetion e)
             {
                 SealOrder.Static.MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
             }
