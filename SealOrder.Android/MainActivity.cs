@@ -121,9 +121,6 @@ public class MainActivity : AvaloniaMainActivity<App>
         if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
             RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
 
-        else
-            SealOrder.Static.MessageBoxManager.GetMessageBoxStandard(string.Empty, "已经给了WRYYYYYY").ShowAsync();
-
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketException));
         
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketTimeoutException));
