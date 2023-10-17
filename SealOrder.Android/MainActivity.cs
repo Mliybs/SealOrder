@@ -93,11 +93,11 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var service = GetSystemService(NotificationService) as NotificationManager;
 
-                service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "Genshin", NotificationImportance.Default));
+                service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "Genshin", NotificationImportance.Max));
 
                 service.Notify(114514, new Notification.Builder(this, "GenshinImpact")
                     .SetContentTitle("我要玩原神！")
-                    .SetContentText("我云游玩原神五年了，其实，我早就是一个原友了")
+                    .SetStyle(new Notification.BigTextStyle().BigText("我云游玩原神五年了，其实，我早就是一个原友了"))
                     .SetSmallIcon(Resource.Drawable.Icon)
                     .Build());
             }
