@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.OS;
 using Android.Net;
 using Android.Content;
