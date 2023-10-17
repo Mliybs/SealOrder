@@ -93,7 +93,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             {
                 var service = GetSystemService(NotificationService) as NotificationManager;
 
-                service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "Genshin", NotificationImportance.Max));
+                service.CreateNotificationChannel(new NotificationChannel("GenshinImpact", "原神专用", NotificationImportance.Max));
 
                 service.Notify(114514, new Notification.Builder(this, "GenshinImpact")
                     .SetContentTitle("我要玩原神！")
@@ -106,6 +106,12 @@ public class MainActivity : AvaloniaMainActivity<App>
                 SealOrder.Static.MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
             }
         };
+
+        if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
+            RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
+
+        else
+            SealOrder.Static.MessageBoxManager.GetMessageBoxStandard(string.Empty, "已经给了WRYYYYYY").ShowAsync();
 
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketException));
         
