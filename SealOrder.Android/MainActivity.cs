@@ -107,11 +107,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
                 if (service.GetNotificationChannel("GenshinImpact").Importance == NotificationImportance.High)
                 {
-                    var intent = new Intent(Settings.ActionChannelNotificationSettings);
+                    var intent = new Intent(Settings.ActionAppNotificationSettings);
 
                     intent.PutExtra(Settings.ExtraAppPackage, PackageName);
-
-                    intent.PutExtra(Settings.ExtraChannelId, "GenshinImpact");
 
                     StartActivity(intent);
                 }
