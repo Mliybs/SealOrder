@@ -10,6 +10,9 @@ using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
 using Java.IO;
+using SealOrder.Static;
+
+using static SealOrder.Static.Static;
 
 namespace SealOrder.Android;
 
@@ -37,13 +40,13 @@ public class MainActivity : AvaloniaMainActivity<App>
     {
         base.OnCreate(savedInstanceState);
 
-        SealOrder.Static.Static.DataDirectory = DataDir!.AbsolutePath;
+        DataDirectory = DataDir!.AbsolutePath;
 
-        SealOrder.Static.Static.LocalCacheDirectory = ExternalCacheDir!.AbsolutePath;
+        LocalCacheDirectory = ExternalCacheDir!.AbsolutePath;
 
-        SealOrder.Static.Static.LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
+        LocalFileDirectory = GetExternalFilesDir(null)!.AbsolutePath;
 
-        SealOrder.Static.Static.Share = dir =>
+        Share = dir =>
         {
             var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
 
@@ -51,14 +54,14 @@ public class MainActivity : AvaloniaMainActivity<App>
 
             intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 
-            intent.SetType(SealOrder.Static.Static.ToMime(dir.Replace(".mnd", string.Empty).Split('.')[^1]));
+            intent.SetType(ToMime(dir.Replace(".mnd", string.Empty).Split('.')[^1]));
 
             intent.PutExtra(Intent.ExtraStream, uri);
 
             StartActivity(Intent.CreateChooser(intent, null as string));
         };
 
-        SealOrder.Static.Static.Open = dir =>
+        Open = dir =>
         {
             var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
 
@@ -75,7 +78,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         if (Intent?.Data is not null)
         {
-            SealOrder.Static.Static.LoadedFile = (Intent.Data.Path!, () =>
+            LoadedFile = (Intent.Data.Path!, () =>
             {
                 var stream = new FileInputStream(ContentResolver!.OpenFileDescriptor(Intent.Data, "r")!.FileDescriptor);
 
@@ -89,7 +92,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             });
         }
 
-        SealOrder.Static.Static.Notify = () =>
+        Notify = () =>
         {
             try
             {
@@ -116,7 +119,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             }
             catch (System.Exception e)
             {
-                SealOrder.Static.MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
+                MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
             }
         };
 
