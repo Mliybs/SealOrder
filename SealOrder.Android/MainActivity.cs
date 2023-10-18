@@ -105,7 +105,7 @@ public class MainActivity : AvaloniaMainActivity<App>
                     .SetSmallIcon(Resource.Drawable.Icon)
                     .Build());
 
-                if (service.GetNotificationChannel("GenshinImpact").Importance == NotificationImportance.Default)
+                if (service.GetNotificationChannel("GenshinImpact").Importance == NotificationImportance.High)
                 {
                     var intent = new Intent(Settings.ActionChannelNotificationSettings);
 
