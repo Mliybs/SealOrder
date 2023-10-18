@@ -92,7 +92,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             });
         }
 
-        Notify = () =>
+        Static.Notify = () =>
         {
             try
             {
