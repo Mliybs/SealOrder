@@ -34,5 +34,5 @@ public partial class ChatView : UserControl
         // }
     }
 
-    private void Send(object sender, RoutedEventArgs e) => Notify?.Invoke();
+    private void Send(object sender, RoutedEventArgs e) => ToNotify?.Invoke();
 }

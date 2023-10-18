@@ -126,7 +126,7 @@ public static class Static
 
     public static Action<string>? Open { get; set; }
 
-    public static Action? Notify { get; set; }
+    public static Action? ToNotify { get; set; }
 
     public const string about = """
         MIT License
