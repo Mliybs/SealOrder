@@ -6,5 +6,6 @@
              x:Class="SealOrder.Views.ChatView">
   <StackPanel>
     <Button Content='点击游玩原神' Click='Send' />
+    <Image Source='/Assets/Images/Icon.png' />
   </StackPanel>
 </UserControl>
