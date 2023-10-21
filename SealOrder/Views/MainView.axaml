@@ -23,13 +23,33 @@
               </Border>
               
               <Border DockPanel.Dock='Bottom'
-                BorderBrush="Black"
-                BorderThickness="2">
+                Background='#dddddd'>
                 <Grid>
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                   </Grid.ColumnDefinitions>
+
+                  <Grid.Styles>
+                    <Style Selector='RadioButton'>
+                      <Setter Property='FontSize' Value='30' />
+                      <Setter Property='Padding' Value='20' />
+                      <Setter Property='Height' Value='60' />
+                      <Setter Property='Template'>
+                        <Setter.Value>
+                          <ControlTemplate>
+                            <TextBlock
+                              VerticalAlignment='Center'
+                              Text='{TemplateBinding Content}' />
+                          </ControlTemplate>
+                        </Setter.Value>
+                      </Setter>
+                    </Style>
+
+                    <Style Selector='RadioButton[IsChecked=True]'>
+                      <Setter Property='Foreground' Value='#0034dd' />
+                    </Style>
+                  </Grid.Styles>
 
                   <RadioButton
                     Grid.Column='0'
