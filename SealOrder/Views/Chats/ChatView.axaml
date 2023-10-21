@@ -5,7 +5,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SealOrder.Views.ChatView">
   <StackPanel>
-    <Button Content='点击游玩原神' Click='Send' />
+    <Button Content='点击游玩原神' Click='Send'>
+      <Button.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="Menu item 1" />
+        </ContextMenu>
+      </Button.ContextMenu>
+    </Button>
     <Image Source='/Assets/Images/Icon.png' />
   </StackPanel>
 </UserControl>
