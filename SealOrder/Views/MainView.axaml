@@ -22,50 +22,53 @@
                 </Menu>
               </Border>
               
-              <Border DockPanel.Dock='Bottom'
+              <Grid
+                DockPanel.Dock='Bottom'
                 Background='#dddddd'>
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                  </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-                  <Grid.Styles>
-                    <Style Selector='RadioButton'>
-                      <Setter Property='FontSize' Value='30' />
-                      <Setter Property='Padding' Value='20' />
-                      <Setter Property='Height' Value='60' />
-                      <Setter Property='Template'>
-                        <Setter.Value>
-                          <ControlTemplate>
+                <Grid.Styles>
+                  <Style Selector='RadioButton'>
+                    <Setter Property='FontSize' Value='30' />
+                    <Setter Property='Height' Value='60' />
+                    <Setter Property='Background' Value='{Binding $parent[Grid].Background}' />
+                    <Setter Property='Template'>
+                      <Setter.Value>
+                        <ControlTemplate>
+                          <Panel
+                            Background='{TemplateBinding Background}'>
                             <TextBlock
+                              HorizontalAlignment='Center'
                               VerticalAlignment='Center'
                               Text='{TemplateBinding Content}' />
-                          </ControlTemplate>
-                        </Setter.Value>
-                      </Setter>
-                    </Style>
+                          </Panel>
+                        </ControlTemplate>
+                      </Setter.Value>
+                    </Setter>
+                  </Style>
 
-                    <Style Selector='RadioButton[IsChecked=True]'>
-                      <Setter Property='Foreground' Value='#0034dd' />
-                    </Style>
-                  </Grid.Styles>
+                  <Style Selector='RadioButton[IsChecked=True]'>
+                    <Setter Property='Foreground' Value='#0034dd' />
+                  </Style>
+                </Grid.Styles>
 
-                  <RadioButton
-                    Grid.Column='0'
-                    HorizontalAlignment='Center'
-                    GroupName='BottomMenu'
-                    Content='聊天'
-                    Name='Chat'
-                    IsChecked='True'/>
-                  <RadioButton
-                    Grid.Column='1'
-                    HorizontalAlignment='Center'
-                    GroupName='BottomMenu'
-                    Content='设置'
-                    Name='Settings'/>
-                </Grid>
-              </Border>
+                <RadioButton
+                  Grid.Column='0'
+                  HorizontalAlignment='Stretch'
+                  GroupName='BottomMenu'
+                  Content='聊天'
+                  Name='Chat'
+                  IsChecked='True'/>
+                <RadioButton
+                  Grid.Column='1'
+                  HorizontalAlignment='Stretch'
+                  GroupName='BottomMenu'
+                  Content='设置'
+                  Name='Settings'/>
+              </Grid>
               <views:ChatView />
             </DockPanel>
 </UserControl>
