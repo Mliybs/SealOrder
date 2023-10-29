@@ -35,9 +35,9 @@ jobs:
         run: dotnet workload install ios
 
       - name: 安装Xcode
-        run: |
-          XCODE_ROOT=/Applications/Xcode_14.3.app
-          sudo xcode-select -s $XCODE_ROOT
+        uses: BoundfoxStudios/action-xcode-select@v1
+        with:
+          version: "14.3"
 
       - name: 构建
         run: |
