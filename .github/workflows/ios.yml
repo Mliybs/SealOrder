@@ -43,5 +43,5 @@ jobs:
         run: |
           cd SealOrder.iOS
           dotnet build -c Release
-          cd bin/Release/
+          cd bin/Release/net7.0-ios
           ls
