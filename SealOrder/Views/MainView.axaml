@@ -34,6 +34,7 @@
                   <Style Selector='RadioButton'>
                     <Setter Property='FontSize' Value='30' />
                     <Setter Property='Height' Value='60' />
+                    <Setter Property='HorizontalAlignment' Value='Stretch' />
                     <Setter Property='Background' Value='{Binding $parent[Grid].Background}' />
                     <Setter Property='Template'>
                       <Setter.Value>
@@ -57,14 +58,12 @@
 
                 <RadioButton
                   Grid.Column='0'
-                  HorizontalAlignment='Stretch'
                   GroupName='BottomMenu'
                   Content='聊天'
                   Name='Chat'
                   IsChecked='True'/>
                 <RadioButton
                   Grid.Column='1'
-                  HorizontalAlignment='Stretch'
                   GroupName='BottomMenu'
                   Content='设置'
                   Name='Settings'/>
