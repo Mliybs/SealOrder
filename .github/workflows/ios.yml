@@ -19,12 +19,12 @@ env:
 
 jobs:
   buildAndroid:
-    runs-on: macos-latest
+    runs-on: macos-13
     name: 构建iOS
     
     steps:
       - name: 检查
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 安装.NET7
         uses: actions/setup-dotnet@v2
