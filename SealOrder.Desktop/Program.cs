@@ -3,7 +3,7 @@ using Avalonia;
 using Avalonia.Media;
 using Avalonia.ReactiveUI;
 
-namespace SealOrder.Desktop;
+namespace SealOrder.Desktop.Desktop;
 
 class Program
 {
@@ -22,53 +22,53 @@ class Program
             .UseReactiveUI()
             .With(new FontManagerOptions
             {
-                DefaultFamilyName = "avares://SealOrder/Assets/Fonts#Alibaba PuHuiTi 3.0",
+                DefaultFamilyName = "avares://SealOrder.Desktop/Assets/Fonts#Alibaba PuHuiTi 3.0",
 
                 FontFallbacks = new FontFallback[]
                 {
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-35-Thin.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-35-Thin.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-45-Light.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-45-Light.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-55-Regular.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-55-Regular.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-65-Medium.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-65-Medium.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-75-SemiBold.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-75-SemiBold.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-85-Bold.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-85-Bold.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-95-ExtraBold.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-95-ExtraBold.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-105-Heavy.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-105-Heavy.otf#Alibaba PuHuiTi 3.0"
                     },
 
                     new()
                     {
-                        FontFamily = "avares://SealOrder/Assets/Fonts/AlibabaPuHuiTi-3-115-Black.otf#Alibaba PuHuiTi 3.0"
+                        FontFamily = "avares://SealOrder.Desktop/Assets/Fonts/AlibabaPuHuiTi-3-115-Black.otf#Alibaba PuHuiTi 3.0"
                     }
                 }
             });

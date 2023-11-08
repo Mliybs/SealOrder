@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaResource Include="Assets/Fonts/*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../SealOrder/SealOrder.csproj" />
   </ItemGroup>
 </Project>
