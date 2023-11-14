@@ -1,20 +1,4 @@
-﻿using Android;
-using Android.App;
-using Android.OS;
-using Android.Net;
-using Android.Provider;
-using Android.Content;
-using Android.Content.PM;
-using AndroidX.Core.Content;
-using Avalonia;
-using Avalonia.Android;
-using Avalonia.ReactiveUI;
-using Java.IO;
-using SealOrder.Static;
-
-using static SealOrder.Static.Static;
-
-namespace SealOrder.Android;
+﻿namespace SealOrder.Android;
 
 [Activity(
     Label = "SealOrder",
@@ -101,7 +85,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         ToNotify = () =>
         {
-            try
+            StartActivity(new Intent(this, typeof(ChatActivity)));
+
+            /* try
             {
                 var service = GetSystemService(NotificationService) as NotificationManager;
 
@@ -127,7 +113,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             catch (System.Exception e)
             {
                 MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
-            }
+            } */
         };
 
         BackPress = base.OnBackPressed;
