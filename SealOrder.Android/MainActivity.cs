@@ -38,6 +38,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
     public override void OnBackPressed()
     {
+        if (OnBackPress is null) base.OnBackPressed();
+        // 禁用base.OnBackPressed阻止返回键
+        else OnBackPress.Invoke();
     }
 
     protected override void OnCreate(Bundle savedInstanceState)
@@ -52,7 +55,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         Share = dir =>
         {
-            var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
+            var uri = FileProvider.GetUriForFile(this, PackageName, new File(dir));
 
             var intent = new Intent(Intent.ActionSend);
 
@@ -67,7 +70,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         Open = dir =>
         {
-            var uri = FileProvider.GetUriForFile(this, "com.Mlinetles.SealOrder", new Java.IO.File(dir));
+            var uri = FileProvider.GetUriForFile(this, PackageName, new File(dir));
 
             var intent = new Intent(Intent.ActionView);
 
@@ -126,6 +129,8 @@ public class MainActivity : AvaloniaMainActivity<App>
                 MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Message).ShowAsync();
             }
         };
+
+        BackPress = base.OnBackPressed;
 
         if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
             RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);

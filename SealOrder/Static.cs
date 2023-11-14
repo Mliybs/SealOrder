@@ -4,7 +4,7 @@ using Org.BouncyCastle.Security;
 
 namespace SealOrder.Static;
 
-public static class Static
+public static partial class Static
 {
     // public static SocketIOClient.Transport.Http.IHttpClient Client => socket.HttpClient;
 
@@ -121,12 +121,6 @@ public static class Static
     public static (string Path, Func<byte[]> Bytes)? LoadedFile { get; set; }
 
     public static string? Access => File.Exists(Path.Combine(DataDirectory, "access.json")) ? File.ReadAllText(Path.Combine(DataDirectory, "access.json")) : null;
-
-    public static Action<string>? Share { get; set; }
-
-    public static Action<string>? Open { get; set; }
-
-    public static Action? ToNotify { get; set; }
 
     public const string about = """
         MIT License
