@@ -10,25 +10,20 @@ public partial class ChatView : UserControl
     {
         InitializeComponent();
 
-        // if (Content is StackPanel panel)
+        // if (Content is ScrollViewer viewer && viewer.Content is StackPanel panel)
         // {
         //     socket.On("online_changed", x =>
         //     {
         //         var res = x.GetValue<JsonElement>();
 
         //         foreach (var item in x.GetValue<JsonElement>().GetProperty("users").EnumerateArray())
-        //             Console.WriteLine(item.ToString());
+        //             Dispatcher.UIThread.Post(() => panel.Children.Add(new ChatUsers(item[0].ToString(), item[1].ToString(), item[2].GetBoolean())));
         //     });
             
         //     socket.On("receive", x =>
         //     {
         //         Console.WriteLine(x.GetValue<string>(2).ToString());
         //     });
-
-        //     socket.OnConnected += (sender, e) =>
-        //     {
-        //         Console.WriteLine("连上了WRYYYYYYYYYYY");
-        //     };
 
         //     socket.ConnectAsync();
         // }

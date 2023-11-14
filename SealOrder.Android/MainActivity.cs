@@ -23,8 +23,8 @@ namespace SealOrder.Android;
     MainLauncher = true,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode),
 IntentFilter(
-    new[] { "android.intent.action.VIEW" },
-    Categories = new[] { "android.intent.category.DEFAULT" },
+    new[] { Intent.ActionView },
+    Categories = new[] { Intent.CategoryDefault },
     DataMimeType = "*/*"
 )]
 public class MainActivity : AvaloniaMainActivity<App>
@@ -34,6 +34,10 @@ public class MainActivity : AvaloniaMainActivity<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
+    }
+
+    public override void OnBackPressed()
+    {
     }
 
     protected override void OnCreate(Bundle savedInstanceState)

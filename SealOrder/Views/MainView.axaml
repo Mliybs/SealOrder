@@ -24,7 +24,7 @@
               
               <Grid
                 DockPanel.Dock='Bottom'
-                Background='#dddddd'>
+                Background='#EEE'>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition />
                   <ColumnDefinition />
@@ -51,7 +51,7 @@
                     </Setter>
                   </Style>
 
-                  <Style Selector='RadioButton[IsChecked=True]'>
+                  <Style Selector='RadioButton:checked'>
                     <Setter Property='Foreground' Value='#0034dd' />
                   </Style>
                 </Grid.Styles>

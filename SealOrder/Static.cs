@@ -6,16 +6,16 @@ namespace SealOrder.Static;
 
 public static class Static
 {
-    public static SocketIOClient.Transport.Http.IHttpClient Client => socket.HttpClient;
+    // public static SocketIOClient.Transport.Http.IHttpClient Client => socket.HttpClient;
 
-    public static readonly SocketIOClient.SocketIO socket = new("wss://next.mliybs.top", new()
-    {
-        Path = "/api/ws/",
+    // public static readonly SocketIOClient.SocketIO socket = new("wss://next.mliybs.top", new()
+    // {
+    //     Path = "/api/ws/",
 
-        Auth = new { username = GetUserOption()["Username"]?.ToString() ?? "Mliybs", token = GetUserOption()["Token"]?.ToString() ?? "L3mBrxZipgB2kPOuj8sjm" },
+    //     Auth = new { username = GetUserOption()["Username"]?.ToString() ?? "Mliybs", token = GetUserOption()["Token"]?.ToString() ?? "L3mBrxZipgB2kPOuj8sjm" },
 
-        Transport = TransportProtocol.WebSocket
-    });
+    //     Transport = TransportProtocol.WebSocket
+    // });
 
     public static JsonNode GetUserOption()
     {

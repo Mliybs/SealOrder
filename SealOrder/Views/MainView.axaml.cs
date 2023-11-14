@@ -10,8 +10,17 @@ public partial class MainView : UserControl
         InitializeComponent();
     }
 
+    private void BackRequested(object? sender, RoutedEventArgs e)
+    {
+        TopLevel.GetTopLevel(this)!.BackRequested -= BackRequested;
+
+        MessageBoxManager.GetMessageBoxStandard("原神", "启动").ShowAsync();
+    }
+
     private async void Load(object sender, RoutedEventArgs e)
     {
+        TopLevel.GetTopLevel(this)!.BackRequested += BackRequested;
+
         if (Directory.Exists(Path.Combine(LocalCacheDirectory, "public/temp")))
             Directory.Delete(Path.Combine(LocalCacheDirectory, "public/temp"), true);
 
