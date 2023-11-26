@@ -118,7 +118,12 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         BackPress = base.OnBackPressed;
 
-        System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.Where(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6 && !x.IsIPv6LinkLocal).ToList().ForEach(x => Toast.MakeText(this, x.ToString(), ToastLength.Long)?.Show());
+        var builder = new System.Text.StringBuilder();
+
+        foreach (var item in System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.Select(x => x.ToString()))
+            builder.AppendLine(item);
+
+        Toast.MakeText(this, builder.ToString(), ToastLength.Long);
 
         // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
         //     RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
