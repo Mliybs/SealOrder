@@ -118,7 +118,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         BackPress = base.OnBackPressed;
 
-        System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.Where(x => !x.IsIPv6LinkLocal).ToList().ForEach(x => Toast.MakeText(this, x.ToString(), ToastLength.Long)?.Show());
+        System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.Where(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6 && !x.IsIPv6LinkLocal).ToList().ForEach(x => Toast.MakeText(this, x.ToString(), ToastLength.Long)?.Show());
 
         // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
         //     RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
