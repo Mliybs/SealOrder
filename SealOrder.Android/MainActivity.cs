@@ -118,8 +118,10 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         BackPress = base.OnBackPressed;
 
-        if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
-            RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
+        System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.Where(x => !x.IsIPv6LinkLocal).ToList().ForEach(x => Toast.MakeText(this, x.ToString(), ToastLength.Long)?.Show());
+
+        // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
+        //     RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
 
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketException));
         
