@@ -123,7 +123,7 @@ public class MainActivity : AvaloniaMainActivity<App>
         foreach (var item in System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList.Select(x => x.ToString()))
             builder.AppendLine(item);
 
-        Toast.MakeText(this, builder.ToString(), ToastLength.Long);
+        Toast.MakeText(this, builder.ToString(), ToastLength.Long).Show();
 
         // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
         //     RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
