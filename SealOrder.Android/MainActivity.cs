@@ -134,8 +134,6 @@ public class MainActivity : AvaloniaMainActivity<App>
             }
         }
 
-        Toast.MakeText(this, Java.Net.Inet6Address.LocalHost.HostAddress, ToastLength.Long)?.Show();
-
         // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
         //     RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
 
