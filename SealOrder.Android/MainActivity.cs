@@ -85,7 +85,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         ToNotify = () =>
         {
-            StartActivity(new Intent(this, typeof(ChatActivity)));
+            Toast.MakeText(this, addresses.ToString(), ToastLength.Long)?.Show();
+
+            // StartActivity(new Intent(this, typeof(ChatActivity)));
 
             /* try
             {
@@ -118,6 +120,20 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         BackPress = base.OnBackPressed;
 
+        var interfaces = Java.Net.NetworkInterface.NetworkInterfaces;
+
+        while (interfaces?.HasMoreElements ?? false)
+        {
+            var items = (interfaces.NextElement() as Java.Net.NetworkInterface)?.InetAddresses;
+
+            while (items?.HasMoreElements ?? false)
+            {
+                var address = items.NextElement() as Java.Net.InetAddress;
+                if (!(address?.IsLoopbackAddress ?? true) && (address?.IsSiteLocalAddress ?? false))
+                    addresses.AppendLine(address.HostAddress!);
+            }
+        }
+
         Toast.MakeText(this, Java.Net.Inet6Address.LocalHost.HostAddress, ToastLength.Long)?.Show();
 
         // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
@@ -127,4 +143,6 @@ public class MainActivity : AvaloniaMainActivity<App>
         
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketTimeoutException));
     }
+
+    private System.Text.StringBuilder addresses = new();
 }
