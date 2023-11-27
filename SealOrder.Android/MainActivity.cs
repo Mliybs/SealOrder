@@ -85,7 +85,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         ToNotify = () =>
         {
-            Toast.MakeText(this, addresses.ToString(), ToastLength.Long)?.Show();
+            MessageBoxManager.GetMessageBoxStandard(string.Empty, addresses.ToString()).ShowAsync();
 
             // StartActivity(new Intent(this, typeof(ChatActivity)));
 
@@ -129,7 +129,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             while (items?.HasMoreElements ?? false)
             {
                 var address = items.NextElement() as Java.Net.InetAddress;
-                addresses.AppendLine(address.HostAddress!);
+                addresses.AppendLine(address!.HostAddress!);
             }
         }
 
