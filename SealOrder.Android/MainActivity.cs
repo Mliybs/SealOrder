@@ -129,8 +129,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             while (items?.HasMoreElements ?? false)
             {
                 var address = items.NextElement() as Java.Net.InetAddress;
-                if (!(address?.IsLoopbackAddress ?? true) && (address?.IsSiteLocalAddress ?? false))
-                    addresses.AppendLine(address.HostAddress!);
+                addresses.AppendLine(address.HostAddress!);
             }
         }
 
