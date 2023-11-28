@@ -161,4 +161,6 @@ public static partial class Static
         "apk" => "application/vnd.android.package-archive",
         _ => "application/octet-stream"
     };
+
+    public static int PublicInt { get; set; } = 0;
 }

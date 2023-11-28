@@ -85,9 +85,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         ToNotify = () =>
         {
-            MessageBoxManager.GetMessageBoxStandard(string.Empty, addresses.ToString()).ShowAsync();
+            // MessageBoxManager.GetMessageBoxStandard(string.Empty, addresses.ToString()).ShowAsync();
 
-            // StartActivity(new Intent(this, typeof(ChatActivity)));
+            StartActivity(new Intent(this, typeof(ChatActivity)));
 
             /* try
             {

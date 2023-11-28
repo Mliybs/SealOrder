@@ -17,5 +17,14 @@ public class ChatActivity : AvaloniaMainActivity
         };
 
         SetContentView(view);
+
+        try
+        {
+            Toast.MakeText(this, PublicInt++.ToString(), ToastLength.Short)?.Show();
+        }
+        catch (Exception e)
+        {
+            Toast.MakeText(this, e.GetType().ToString(), ToastLength.Short)?.Show();
+        }
     }
 }
