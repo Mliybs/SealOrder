@@ -129,7 +129,7 @@ public class MainActivity : AvaloniaMainActivity<App>
             while (items?.HasMoreElements ?? false)
             {
                 var address = items.NextElement() as Java.Net.InetAddress;
-                addresses.AppendLine(address!.HostAddress!);
+                addresses.AppendLine($"{address!.HostAddress!} {address is Java.Net.Inet6Address}");
             }
         }
 
