@@ -19,6 +19,8 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 {
                     GetIP = ReactiveCommand.CreateFromTask(async () =>
                     {
+                        Toast.MakeText(this, "114514", ToastLength.Short)?.Show();
+
                         var res = await Client.GetAsync("https://service.mliybs.top/ip");
 
                         if (!res.IsSuccessStatusCode)
@@ -27,7 +29,11 @@ public class P2PConnectActivity : AvaloniaMainActivity
 
                             return;
                         }
-                        string ip = await res.Content.ReadAsStringAsync();
+                        var builder = new System.Text.StringBuilder();
+
+                        var ip = await res.Content.ReadAsStringAsync();
+
+                        builder.AppendLine(ip);
 
                         var interfaces = Java.Net.NetworkInterface.NetworkInterfaces;
 
@@ -38,12 +44,7 @@ public class P2PConnectActivity : AvaloniaMainActivity
                             while (items?.HasMoreElements ?? false)
                             {
                                 var address = (Java.Net.InetAddress)items.NextElement()!;
-                                if (ip == address.HostAddress)
-                                {
-                                    Toast.MakeText(this, address.HostAddress, ToastLength.Short)?.Show();
-
-                                    return;
-                                }
+                                builder.AppendLine($"{address.HostAddress} {address.HostAddress == ip}");
                             }
                         }
                     })
