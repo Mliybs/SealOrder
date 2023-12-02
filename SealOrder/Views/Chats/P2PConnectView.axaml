@@ -51,5 +51,11 @@
       Grid.Column='0'
       Content='进入客户端模式：'
       Command='{Binding ClientMode}' />
+
+    <Button
+      Grid.Row='5'
+      Grid.Column='0'
+      Content='获取当前可用公网IP：'
+      Command='{Binding GetIP}' />
   </Grid>
 </UserControl>
