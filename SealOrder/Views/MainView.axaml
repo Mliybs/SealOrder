@@ -23,8 +23,7 @@
               </Border>
               
               <Grid
-                DockPanel.Dock='Bottom'
-                Background='#111'>
+                DockPanel.Dock='Bottom'>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition />
                   <ColumnDefinition />
@@ -35,7 +34,7 @@
                     <Setter Property='FontSize' Value='30' />
                     <Setter Property='Height' Value='60' />
                     <Setter Property='HorizontalAlignment' Value='Stretch' />
-                    <Setter Property='Background' Value='{Binding $parent[Grid].Background}' />
+                    <Setter Property='Background' Value='White' />
                     <Setter Property='Template'>
                       <Setter.Value>
                         <ControlTemplate>

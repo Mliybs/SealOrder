@@ -1,5 +1,6 @@
 global using System;
 global using System.Collections.Generic;
+global using System.Net;
 global using System.Linq;
 
 global using Android;
@@ -12,6 +13,7 @@ global using Android.Content;
 global using Android.Content.PM;
 global using AndroidX.Core.Content;
 global using Avalonia;
+global using Avalonia.Controls;
 global using Avalonia.Android;
 global using Avalonia.ReactiveUI;
 global using Java.IO;
