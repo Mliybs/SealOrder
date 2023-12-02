@@ -19,8 +19,6 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 {
                     GetIP = ReactiveCommand.CreateFromTask(async () =>
                     {
-                        Toast.MakeText(this, "114514", ToastLength.Short)?.Show();
-
                         var res = await Client.GetAsync("https://service.mliybs.top/ip");
 
                         if (!res.IsSuccessStatusCode)
@@ -32,6 +30,8 @@ public class P2PConnectActivity : AvaloniaMainActivity
                         var builder = new System.Text.StringBuilder();
 
                         var ip = await res.Content.ReadAsStringAsync();
+
+                        Toast.MakeText(this, ip, ToastLength.Short)?.Show();
 
                         builder.AppendLine(ip);
 
