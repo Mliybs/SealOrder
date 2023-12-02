@@ -8,7 +8,7 @@
              x:Class="SealOrder.Views.MainView"
              x:DataType="vm:MainViewModel"
              Loaded='Load'
-             Background='#000'>
+             Background='#111'>
             <DockPanel Name='Root'>
               <Border DockPanel.Dock='Top'
                 BorderBrush="Black"
@@ -25,7 +25,7 @@
               
               <Grid
                 DockPanel.Dock='Bottom'
-                Background='#EEE'>
+                Background='#111'>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition />
                   <ColumnDefinition />
@@ -52,8 +52,11 @@
                     </Setter>
                   </Style>
 
+                  <Style Selector='RadioButton'>
+                    <Setter Property='Foreground' Value='#C5C5C5' />
+                  </Style>
                   <Style Selector='RadioButton:checked'>
-                    <Setter Property='Foreground' Value='#0034dd' />
+                    <Setter Property='Foreground' Value='#164CFF' />
                   </Style>
                 </Grid.Styles>
 

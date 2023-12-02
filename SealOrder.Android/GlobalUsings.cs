@@ -15,7 +15,9 @@ global using Avalonia;
 global using Avalonia.Android;
 global using Avalonia.ReactiveUI;
 global using Java.IO;
+global using ReactiveUI;
 global using SealOrder.Views;
+global using SealOrder.ViewModels;
 global using SealOrder.Static;
 
 global using static SealOrder.Static.Static;

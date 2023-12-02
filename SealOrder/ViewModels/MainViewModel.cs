@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace SealOrder.ViewModels;
+﻿namespace SealOrder.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {

@@ -1,7 +1,7 @@
 namespace SealOrder.Android;
 
 [Activity(
-    Label = "原神",
+    Label = "SealOrder",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
@@ -17,14 +17,5 @@ public class ChatActivity : AvaloniaMainActivity
         };
 
         SetContentView(view);
-
-        try
-        {
-            Toast.MakeText(this, PublicInt++.ToString(), ToastLength.Short)?.Show();
-        }
-        catch (Exception e)
-        {
-            Toast.MakeText(this, e.GetType().ToString(), ToastLength.Short)?.Show();
-        }
     }
 }

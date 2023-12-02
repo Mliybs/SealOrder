@@ -85,9 +85,9 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         ToNotify = () =>
         {
-            // MessageBoxManager.GetMessageBoxStandard(string.Empty, addresses.ToString()).ShowAsync();
+            StartActivity(new Intent(this, typeof(P2PConnectActivity)));
 
-            StartActivity(new Intent(this, typeof(ChatActivity)));
+            // StartActivity(new Intent(this, typeof(ChatActivity)));
 
             /* try
             {
@@ -120,19 +120,6 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         BackPress = base.OnBackPressed;
 
-        var interfaces = Java.Net.NetworkInterface.NetworkInterfaces;
-
-        while (interfaces?.HasMoreElements ?? false)
-        {
-            var items = (interfaces.NextElement() as Java.Net.NetworkInterface)?.InetAddresses;
-
-            while (items?.HasMoreElements ?? false)
-            {
-                var address = items.NextElement() as Java.Net.InetAddress;
-                addresses.AppendLine($"{address!.HostAddress!} {address is Java.Net.Inet6Address}");
-            }
-        }
-
         // if (CheckSelfPermission(Manifest.Permission.PostNotifications) == Permission.Denied)
         //     RequestPermissions(new string[] { Manifest.Permission.PostNotifications }, 1);
 
@@ -140,6 +127,4 @@ public class MainActivity : AvaloniaMainActivity<App>
         
         // SealOrder.Static.Static.socket.AddExpectedException(typeof(Java.Net.SocketTimeoutException));
     }
-
-    private System.Text.StringBuilder addresses = new();
 }

@@ -6,6 +6,8 @@ namespace SealOrder.Static;
 
 public static partial class Static
 {
+    public static HttpClient Client { get; } = new();
+
     // public static SocketIOClient.Transport.Http.IHttpClient Client => socket.HttpClient;
 
     // public static readonly SocketIOClient.SocketIO socket = new("wss://next.mliybs.top", new()
@@ -161,6 +163,4 @@ public static partial class Static
         "apk" => "application/vnd.android.package-archive",
         _ => "application/octet-stream"
     };
-
-    public static int PublicInt { get; set; } = 0;
 }
