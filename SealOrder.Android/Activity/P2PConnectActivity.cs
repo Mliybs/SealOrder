@@ -47,6 +47,8 @@ public class P2PConnectActivity : AvaloniaMainActivity
                                 builder.AppendLine($"{address.HostAddress} {address.HostAddress == ip}");
                             }
                         }
+
+                        _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, builder.ToString()).ShowAsync();
                     })
                 }
             }
