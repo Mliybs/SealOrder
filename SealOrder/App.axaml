@@ -14,6 +14,8 @@
 
         <Style Selector=':is(TemplatedControl)'>
             <Setter Property='FontWeight' Value='Bold' />
+            <Setter Property='Foreground' Value='White' />
+            <Setter Property='Background' Value='#111' />
         </Style>
 
         <Style Selector='TextBlock'>
@@ -22,7 +24,6 @@
 
         <Style Selector='Button'>
             <Setter Property='Foreground' Value='White' />
-            <Setter Property='Background' Value='Black' />
         </Style>
     </Application.Styles>
 </Application>

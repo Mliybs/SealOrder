@@ -36,6 +36,7 @@
                     <Setter Property='FontSize' Value='30' />
                     <Setter Property='Height' Value='60' />
                     <Setter Property='HorizontalAlignment' Value='Stretch' />
+                    <Setter Property='Foreground' Value='#C5C5C5' />
                     <Setter Property='Background' Value='{Binding $parent[Grid].Background}' />
                     <Setter Property='Template'>
                       <Setter.Value>
@@ -52,9 +53,6 @@
                     </Setter>
                   </Style>
 
-                  <Style Selector='RadioButton'>
-                    <Setter Property='Foreground' Value='#C5C5C5' />
-                  </Style>
                   <Style Selector='RadioButton:checked'>
                     <Setter Property='Foreground' Value='#164CFF' />
                   </Style>
