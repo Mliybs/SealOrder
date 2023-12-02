@@ -2,9 +2,9 @@ namespace SealOrder.ViewModels;
 
 public class P2PConnectViewModel : ViewModelBase
 {
-    public P2PConnectViewModel(Func<Task> execute)
+    public P2PConnectViewModel()
     {
-        GetIP = ReactiveCommand.CreateFromTask(execute, this.WhenAnyValue(x => x.InputIP, x =>
+        ClientMode = ReactiveCommand.Create(() => {}, this.WhenAnyValue(x => x.InputIP, x =>
         {
             var array = x.Split(' ');
             if (array.Length != 2) return false;
@@ -21,9 +21,9 @@ public class P2PConnectViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref inputIP, value);
     }
 
-    public ReactiveCommand<Unit, Unit> GetIP { get; }
+    public required ReactiveCommand<Unit, Unit> GetIP { get; init; }
 
     public ReactiveCommand<Unit, Unit> ServerMode { get; } = ReactiveCommand.Create(() => {});
 
-    public ReactiveCommand<Unit, Unit> ClientMode { get; } = ReactiveCommand.Create(() => {});
+    public ReactiveCommand<Unit, Unit> ClientMode { get; }
 }
