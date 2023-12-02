@@ -13,6 +13,8 @@
     <TextBox
       Grid.Row='1'
       Grid.Column='1'
+      AcceptsReturn="True"
+      TextWrapping="Wrap"
       Watermark='输入对方的IP与端口（用空格隔开）' />
 
     <Button

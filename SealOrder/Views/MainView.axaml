@@ -7,8 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SealOrder.Views.MainView"
              x:DataType="vm:MainViewModel"
-             Loaded='Load'
-             Background='#111'>
+             Loaded='Load'>
             <DockPanel Name='Root'>
               <Border DockPanel.Dock='Top'
                 BorderBrush="Black"
@@ -36,7 +35,6 @@
                     <Setter Property='FontSize' Value='30' />
                     <Setter Property='Height' Value='60' />
                     <Setter Property='HorizontalAlignment' Value='Stretch' />
-                    <Setter Property='Foreground' Value='#C5C5C5' />
                     <Setter Property='Background' Value='{Binding $parent[Grid].Background}' />
                     <Setter Property='Template'>
                       <Setter.Value>
@@ -54,7 +52,7 @@
                   </Style>
 
                   <Style Selector='RadioButton:checked'>
-                    <Setter Property='Foreground' Value='#164CFF' />
+                    <Setter Property='Foreground' Value='#477CFF' />
                   </Style>
                 </Grid.Styles>
 
