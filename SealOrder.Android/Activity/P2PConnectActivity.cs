@@ -25,13 +25,8 @@ public class P2PConnectActivity : AvaloniaMainActivity
 
                     return;
                 }
-                var builder = new System.Text.StringBuilder();
 
                 var ip = await res.Content.ReadAsStringAsync();
-
-                Toast.MakeText(this, ip, ToastLength.Short)?.Show();
-
-                builder.AppendLine(ip);
 
                 var interfaces = Java.Net.NetworkInterface.NetworkInterfaces;
 
@@ -42,11 +37,15 @@ public class P2PConnectActivity : AvaloniaMainActivity
                     while (items?.HasMoreElements ?? false)
                     {
                         var address = (Java.Net.InetAddress)items.NextElement()!;
-                        builder.AppendLine($"{address.HostAddress} {address.HostAddress == ip}");
+                        if (ip == address.HostAddress)
+                        {
+                            _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您的可用公网IP为：\n{ip}").ShowAsPopupAsync(view);
+                            return;
+                        }
                     }
                 }
 
-                _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, builder.ToString()).ShowAsPopupAsync(view);
+                _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您没有可用的公网IP！").ShowAsPopupAsync(view);
             })
         };
 
