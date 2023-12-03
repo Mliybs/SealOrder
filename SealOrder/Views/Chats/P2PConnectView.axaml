@@ -8,8 +8,8 @@
              x:DataType='vm:P2PConnectViewModel'>
   <Grid
     Margin='5 15'
-    RowDefinitions='*,*,*,*,*,*'
-    ColumnDefinitions='*,*,*'>
+    RowDefinitions='*,Auto,*,3*'
+    ColumnDefinitions='*,*'>
 
     <Grid.Styles>
       <Style Selector='TextBlock'>
@@ -30,32 +30,32 @@
     <Button
       Grid.Row='1'
       Grid.Column='0'
+      Content='获取当前可用公网IP：'
+      Command='{Binding GetIP}' />
+
+    <Button
+      Grid.Row='2'
+      Grid.Column='0'
       Content='进入服务端模式：'
       Command='{Binding ServerMode}' />
 
     <TextBlock
-      Grid.Row='2'
-      Grid.Column='0'
+      Grid.Row='0'
+      Grid.Column='1'
       Text='客户端模式：' />
 
     <TextBox
-      Grid.Row='3'
-      Grid.ColumnSpan='1'
+      Grid.Row='1'
+      Grid.Column='1'
       AcceptsReturn="True"
       TextWrapping="Wrap"
       Watermark='输入对方的IP与端口（用空格隔开）'
       Text='{Binding InputIP}' />
 
     <Button
-      Grid.Row='4'
-      Grid.Column='0'
+      Grid.Row='2'
+      Grid.Column='1'
       Content='进入客户端模式：'
       Command='{Binding ClientMode}' />
-
-    <Button
-      Grid.Row='5'
-      Grid.Column='0'
-      Content='获取当前可用公网IP：'
-      Command='{Binding GetIP}' />
   </Grid>
 </UserControl>
