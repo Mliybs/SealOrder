@@ -22,10 +22,16 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 try
                 {
                     res = await Client.GetAsync("https://service.mliybs.top/ip");
+                }
+                catch (Exception e)
+                {
+                    _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"程序遭遇了异常！：{e.GetType()}\n{e.Message}").ShowAsPopupAsync(view);
+                    return;
+                }
 
                 if (!res.IsSuccessStatusCode)
                 {
-                    Toast.MakeText(this, "牛魔的报错了", ToastLength.Short)?.Show();
+                    Toast.MakeText(this, "兄弟，服务器返回错误了", ToastLength.Short)?.Show();
                     return;
                 }
 
@@ -51,12 +57,6 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 }
 
                 _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您没有可用的公网IP！").ShowAsPopupAsync(view);
-                }
-                catch (Exception e)
-                {
-                    Toast.MakeText(this, $"{e.GetType().ToString()} {e.Message}", ToastLength.Long)?.Show();
-                    return;
-                }
             }),
 
             ClientMode = ReactiveCommand.Create(() => { }, isInputValid),
