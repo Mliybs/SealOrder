@@ -15,7 +15,6 @@ public class ChatActivity : AvaloniaMainActivity
 
         if (Intent is not null) view.Loaded += async (sender, e) =>
         {
-            if （Intent is null) return;
             var intent = Intent;
             switch (intent.GetIntExtra("mode", 0))
             {
