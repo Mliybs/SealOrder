@@ -26,7 +26,7 @@ public class ChatActivity : AvaloniaMainActivity
             {
                 case 0: throw new InvalidOperationException("没有启动参数！");
                 case 1: //客户端模式
-                    var input = intent.GetStringExtra("input") ?? throw new ArgumentNullException("没有输入参数！");
+                    var input = intent.GetStringExtra("input") ?? throw new ArgumentNullException("input", "没有输入参数！");
                     var array = input.Split(' ');
                     if (array.Length != 2) throw new ArgumentException("输入参数错误！");
                     if (!(IPAddress.TryParse(array[0], out _) && int.TryParse(array[1], out var port) && port is >= 0 and <= 65535))
