@@ -21,5 +21,6 @@ global using ReactiveUI;
 global using SealOrder.Views;
 global using SealOrder.ViewModels;
 global using SealOrder.Static;
+global using SealOrder.Internals;
 
 global using static SealOrder.Static.Static;

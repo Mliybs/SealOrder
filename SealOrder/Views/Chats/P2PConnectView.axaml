@@ -8,7 +8,7 @@
              x:DataType='vm:P2PConnectViewModel'>
   <Grid
     Margin='5 15'
-    RowDefinitions='*,Auto,*,3*'
+    RowDefinitions='*,Auto,*,*,2*'
     ColumnDefinitions='*,*'>
 
     <Grid.Styles>
@@ -27,17 +27,26 @@
       Grid.Column='0'
       Text='服务端模式：' />
 
-    <Button
+    <TextBox
       Grid.Row='1'
       Grid.Column='0'
-      Content='获取当前可用公网IP'
-      Command='{Binding GetIP}' />
-
+      AcceptsReturn="True"
+      TextWrapping="Wrap"
+      Watermark='输入自己的IP'
+      Text='{Binding PublicIP}' />
     <Button
       Grid.Row='2'
       Grid.Column='0'
       Content='进入服务端模式'
-      Command='{Binding ServerMode}' />
+      Command='{Binding ServerMode}'
+      CommandParameter='{Binding PublicIP}' />
+
+    <Button
+      Grid.Row='3'
+      Grid.Column='0'
+      Content='获取当前可用公网IP'
+      Command='{Binding GetIP}' />
+
 
     <TextBlock
       Grid.Row='0'
@@ -56,6 +65,7 @@
       Grid.Row='2'
       Grid.Column='1'
       Content='进入客户端模式'
-      Command='{Binding ClientMode}' />
+      Command='{Binding ClientMode}'
+      CommandParameter='{Binding InputIP}' />
   </Grid>
 </UserControl>

@@ -13,7 +13,7 @@ public class P2PConnectActivity : AvaloniaMainActivity
 
         var view = new P2PConnectView();
 
-        view.DataContext = new P2PConnectViewModel(out var isInputValid)
+        view.DataContext = new P2PConnectViewModel(out var isInputValid, out var isIpValid)
         {
             GetIP = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -59,9 +59,9 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您没有可用的公网IP！").ShowAsPopupAsync(view);
             }),
 
-            ClientMode = ReactiveCommand.Create(() => { }, isInputValid),
+            ClientMode = ReactiveCommand.Create<string>(x => StartActivity(new Intent(this, typeof(ChatActivity)).PutExtra("mode", 1).PutExtra("input", x)), isInputValid),
 
-            ServerMode = ReactiveCommand.Create(() => { })
+            ServerMode = ReactiveCommand.Create<string>(x => StartActivity(new Intent(this, typeof(ChatActivity)).PutExtra("mode", 2).PutExtra("ip", x)), isIpValid)
         };
 
         SetContentView(new AvaloniaView(this)
