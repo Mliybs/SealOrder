@@ -13,11 +13,21 @@ public class P2PConnectActivity : AvaloniaMainActivity
 
         var view = new P2PConnectView();
 
-        view.DataContext = new P2PConnectViewModel()
+        view.DataContext = new P2PConnectViewModel(out var isInputValid)
         {
             GetIP = ReactiveCommand.CreateFromTask(async () =>
             {
-                var res = await Client.GetAsync("https://service.mliybs.top/ip");
+                System.Net.Http.HttpResponseMessage res;
+
+                try
+                {
+                    res = await Client.GetAsync("https://service.mliybs.top/ip");
+                }
+                catch (System.Net.Http.HttpRequestException)
+                {
+                    Toast.MakeText(this, "牛魔的报错了", ToastLength.Short)?.Show();
+                    return;
+                }
 
                 if (!res.IsSuccessStatusCode)
                 {
@@ -47,7 +57,11 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 }
 
                 _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您没有可用的公网IP！").ShowAsPopupAsync(view);
-            })
+            }),
+
+            ClientMode = ReactiveCommand.Create(() => { }, isInputValid),
+
+            ServerMode = ReactiveCommand.Create(() => { })
         };
 
         SetContentView(new AvaloniaView(this)
