@@ -13,7 +13,7 @@ public class ChatActivity : AvaloniaMainActivity
 
         var view = new ChatUsers();
 
-        if (Intent is not null) view.Loaded += async (sender, e)
+        if (Intent is not null) view.Loaded += async (sender, e) =>
         {
             if （Intent is null) return;
             var intent = Intent;
