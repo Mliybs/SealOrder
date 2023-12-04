@@ -42,7 +42,7 @@ public class ChatActivity : AvaloniaMainActivity
                     _ = TopLevel.GetTopLevel(view)?.Clipboard?.SetTextAsync($"{ip} {Connect.Port}");
                     Toast.MakeText(this, "已复制到剪贴板", ToastLength.Short)?.Show();
                     }
-                    catch(Exception exc){Toast.MakeText(this, $"{e.GetType()}\n{e.Message}", ToastLength.Short)?.Show();}
+                    catch(Exception exc){Toast.MakeText(this, $"{exc.GetType()}\n{exc.Message}", ToastLength.Short)?.Show();}
                     break;
             }
         };
