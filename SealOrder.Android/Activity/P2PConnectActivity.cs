@@ -54,7 +54,7 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 }
                 catch (Exception e)
                 {
-                    Toast.MakeText(this, $"{e.GetType.ToString()} {e.Message}", ToastLength.Long)?.Show();
+                    Toast.MakeText(this, $"{e.GetType().ToString()} {e.Message}", ToastLength.Long)?.Show();
                     return;
                 }
             }),
