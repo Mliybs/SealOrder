@@ -37,15 +37,18 @@ public class ChatActivity : AvaloniaMainActivity
                     }
                     catch
                     {
-                        Toast.MakeText(this, "连接失败！", ToastLength.Short);
+                        Toast.MakeText(this, "连接失败！", ToastLength.Short)?.Show();
                     }
                     break;
                 case 2: //服务端模式
+                    try{
                     var ip = intent.GetStringExtra("ip") ?? throw new ArgumentNullException("ip", "没有输入参数！");
                     Connect.AsServer();
                     _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您的服务器连接地址为：\n{ip} {Connect.Port}").ShowAsPopupAsync(view);
                     _ = TopLevel.GetTopLevel(view)?.Clipboard?.SetTextAsync($"{ip} {Connect.Port}");
                     Toast.MakeText(this, "已复制到剪贴板", ToastLength.Short)?.Show();
+                    }
+                    catch(Exception e){Toast.MakeText(this, $"{e.GetType()}\n{e.Message}", ToastLength.Short)?.Show();}
                     break;
             }
         }
