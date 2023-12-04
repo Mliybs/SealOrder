@@ -25,7 +25,7 @@ public class P2PConnectActivity : AvaloniaMainActivity
                 }
                 catch (Exception e)
                 {
-                    _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"程序遭遇了异常！：{e.GetType()}\n{e.Message}").ShowAsPopupAsync(view);
+                    _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"程序遭遇了异常！\n{e.GetType()}：\n{e.Message}").ShowAsPopupAsync(view);
                     return;
                 }
 
