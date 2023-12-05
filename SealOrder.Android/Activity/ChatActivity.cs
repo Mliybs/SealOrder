@@ -13,15 +13,9 @@ public class ChatActivity : AvaloniaMainActivity
 
         var view = new ChatUsers();
 
-        SetContentView(new AvaloniaView(this)
+        if (Intent is not null) view.Loaded += async (sender, e) =>
         {
-            Content = view
-        });
-
-        if (Intent is not null) Operate(Intent);
-
-        async void Operate(Intent intent)
-        {
+            var intent = Intent;
             switch (intent.GetIntExtra("mode", 0))
             {
                 case 0: throw new InvalidOperationException("没有启动参数！");
@@ -48,10 +42,15 @@ public class ChatActivity : AvaloniaMainActivity
                     _ = TopLevel.GetTopLevel(view)?.Clipboard?.SetTextAsync($"{ip} {Connect.Port}");
                     Toast.MakeText(this, "已复制到剪贴板", ToastLength.Short)?.Show();
                     }
-                    catch(Exception e){Toast.MakeText(this, $"{e.GetType()}\n{e.Message}", ToastLength.Short)?.Show();}
+                    catch(Exception exc){Toast.MakeText(this, $"{exc.GetType()}\n{exc.Message}", ToastLength.Short)?.Show();}
                     break;
             }
-        }
+        };
+
+        SetContentView(new AvaloniaView(this)
+        {
+            Content = view
+        });
     }
 
     public P2PConnect Connect { get; } = new();
