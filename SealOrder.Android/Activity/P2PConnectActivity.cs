@@ -13,7 +13,7 @@ public class P2PConnectActivity : AvaloniaMainActivity
 
         var view = new P2PConnectView();
 
-        view.DataContext = new P2PConnectViewModel(out var isInputValid, out var isIpValid)
+        view.DataContext = new P2PConnectViewModel(out var isInputValid, out var isIpValid, out var modify)
         {
             GetIP = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -49,8 +49,7 @@ public class P2PConnectActivity : AvaloniaMainActivity
                         if (ip == address.HostAddress)
                         {
                             _ = MessageBoxManager.GetMessageBoxStandard(string.Empty, $"您的可用公网IP为：\n{ip}").ShowAsPopupAsync(view);
-                            _ = TopLevel.GetTopLevel(view)?.Clipboard?.SetTextAsync(ip);
-                            Toast.MakeText(this, "已复制到剪贴板", ToastLength.Short)?.Show();
+                            modify.Invoke(ip);
                             return;
                         }
                     }

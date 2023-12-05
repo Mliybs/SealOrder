@@ -2,7 +2,7 @@ namespace SealOrder.ViewModels;
 
 public class P2PConnectViewModel : ViewModelBase
 {
-    public P2PConnectViewModel(out IObservable<bool> isInputValid, out IObservable<bool> isIpValid)
+    public P2PConnectViewModel(out IObservable<bool> isInputValid, out IObservable<bool> isIpValid, out Action<string> modify)
     {
         isInputValid = this.WhenAnyValue(x => x.InputIP, x =>
         {
@@ -13,6 +13,8 @@ public class P2PConnectViewModel : ViewModelBase
         });
 
         isIpValid = this.WhenAnyValue(x => x.PublicIP, x => IPAddress.TryParse(x, out _));
+
+        modify = x => PublicIP = x;
     }
 
     private string inputIP = string.Empty;

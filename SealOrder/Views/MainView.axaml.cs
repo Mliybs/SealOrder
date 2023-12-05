@@ -133,7 +133,7 @@ public partial class MainView : UserControl
                                 {
                                     using var write = await save.OpenWriteAsync();
                                     
-                                    write.Write(bytes);
+                                    await write.WriteAsync(bytes);
 
                                     await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                                 }
@@ -258,7 +258,7 @@ public partial class MainView : UserControl
 
                         var buffer = new byte[stream.Length];
 
-                        stream.Read(buffer);
+                        await stream.ReadAsync(buffer);
 
                         var access = JsonDocument.Parse(Access).RootElement;
 
@@ -296,14 +296,14 @@ public partial class MainView : UserControl
 
                                 var save = await level.StorageProvider.SaveFilePickerAsync(new()
                                 {
-                                    SuggestedFileName = file.Name + "mnd"
+                                    SuggestedFileName = file.Name + ".mnd"
                                 });
 
                                 if (save is not null)
                                 {
                                     using var write = await save.OpenWriteAsync();
                                     
-                                    write.Write(bytes);
+                                    await write.WriteAsync(bytes);
 
                                     await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                                 }
@@ -312,10 +312,10 @@ public partial class MainView : UserControl
 
                             case "分享":
 
-                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name + "mnd"), bytes);
+                                File.WriteAllBytes(Path.Combine(LocalCacheDirectory, "public/temp", file.Name + ".mnd"), bytes);
 
                                 if (Share is not null)
-                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name + "mnd"));
+                                    Share.Invoke(Path.Combine(LocalCacheDirectory, "public/temp", file.Name + ".mnd"));
 
                                 else
                                     PlatformNotSupport();
@@ -355,7 +355,7 @@ public partial class MainView : UserControl
 
                         var buffer = new byte[stream.Length];
 
-                        stream.Read(buffer);
+                        await stream.ReadAsync(buffer);
 
                         var access = JsonDocument.Parse(Access).RootElement;
 
@@ -418,7 +418,7 @@ public partial class MainView : UserControl
                                 {
                                     using var write = await save.OpenWriteAsync();
                                     
-                                    write.Write(bytes);
+                                    await write.WriteAsync(bytes);
 
                                     await MessageBoxManager.GetMessageBoxStandard(string.Empty, "保存成功").ShowAsync();
                                 }
