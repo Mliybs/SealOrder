@@ -16,7 +16,7 @@
       <Button
         DockPanel.Dock='Right'
         Content='发送'
-        Command='Send' />
+        Click='Send' />
       <TextBox
         Name='Input'
         MaxHeight='100'
