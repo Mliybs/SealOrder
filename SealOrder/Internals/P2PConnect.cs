@@ -81,11 +81,17 @@ public class P2PConnect
         });
     }
     
-    public async void Received(Action<ReadOnlySequence<byte>> action)
+    public async void Received(BytesDelegate action)
     {
         try
         {
-            while (!IsClosed) action.Invoke(await ReceiveAsync());
+            while (!IsClosed)
+            {
+                var result = await reader.ReadAsync(source.Token);
+                var buffer = result.Buffer;
+                reader.AdvanceTo(buffer.End);
+                action.Invoke(buffer);
+            }
         }
         catch (Exception e)
         {
@@ -111,3 +117,5 @@ public class P2PConnect
         MainSocket.Dispose();
     }
 }
+
+public delegate void BytesDelegate(in ReadOnlySequence<byte> bytes);

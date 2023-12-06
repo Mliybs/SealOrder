@@ -11,7 +11,7 @@ public class ChatActivity : AvaloniaMainActivity
     {
         base.OnCreate(savedInstanceState);
 
-        var view = new ChatUsers();
+        var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x));
 
         if (Intent is not null) view.Loaded += async (sender, e) =>
         {
@@ -45,6 +45,8 @@ public class ChatActivity : AvaloniaMainActivity
                     catch(Exception exc){Toast.MakeText(this, $"{exc.GetType()}\n{exc.Message}", ToastLength.Short)?.Show();}
                     break;
             }
+
+            Connect.Received(received);
         };
 
         SetContentView(new AvaloniaView(this)

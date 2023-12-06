@@ -11,7 +11,18 @@
         Width='100'
         TextTrimming='CharacterEllipsis' />
     </DockPanel>
-    <Grid>
-    </Grid>
+    <DockPanel
+      DockPanel.Dock='Bottom'>
+      <Button
+        DockPanel.Dock='Right'
+        Content='发送'
+        Command='Send' />
+      <TextBox
+        Name='Input'
+        MaxHeight='100'
+        AcceptsReturn='True' />
+    </DockPanel>
+    <StackPanel Name='Messages'>
+    </StackPanel>
   </DockPanel>
 </UserControl>
