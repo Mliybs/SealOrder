@@ -21,7 +21,8 @@
       <TextBox
         Name='Input'
         MaxHeight='100'
-        AcceptsReturn='True' />
+        AcceptsReturn='True'
+        LostFocus='FocusLost' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
