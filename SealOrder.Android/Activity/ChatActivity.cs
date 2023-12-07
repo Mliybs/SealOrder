@@ -4,7 +4,8 @@ namespace SealOrder.Android;
     Label = "SealOrder",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
-    ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
+    ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode,
+    WindowSoftInputMode = SoftInput.AdjustResize)]
 public class ChatActivity : AvaloniaMainActivity
 {
     protected override void OnCreate(Bundle? savedInstanceState)

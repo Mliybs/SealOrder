@@ -7,6 +7,7 @@ global using Android;
 global using Android.App;
 global using Android.OS;
 global using Android.Net;
+global using Android.Views;
 global using Android.Widget;
 global using Android.Provider;
 global using Android.Content;

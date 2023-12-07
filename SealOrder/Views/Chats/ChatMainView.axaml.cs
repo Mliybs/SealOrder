@@ -27,7 +27,8 @@ public partial class ChatMainView : UserControl
     {
         Messages.Children.Add(new TextBlock()
         {
-            Text = Encoding.UTF8.GetString(bytes)
+            Text = Encoding.UTF8.GetString(bytes),
+            HorizontalAlignment = HorizontalAlignment.Left
         });
     }
 
@@ -36,6 +37,12 @@ public partial class ChatMainView : UserControl
         if (ToSend is null) return;
         var text = Input.Text;
         if (text is null) return;
+        Input.Text = null;
+        Messages.Children.Add(new TextBlock()
+        {
+            Text = text,
+            HorizontalAlignment = HorizontalAlignment.Right
+        });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
     }
 }

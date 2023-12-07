@@ -34,6 +34,7 @@ global using Avalonia.Input.Raw;
 global using Avalonia.Input.TextInput;
 
 global using Avalonia.Data;
+global using Avalonia.Layout;
 global using Avalonia.Styling;
 global using Avalonia.Media;
 global using Avalonia.Media.Fonts;
