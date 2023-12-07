@@ -44,5 +44,6 @@ public partial class ChatMainView : UserControl
             HorizontalAlignment = HorizontalAlignment.Right
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
+        e.Handled = true;
     }
 }
