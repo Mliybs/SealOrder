@@ -48,6 +48,6 @@ public partial class ChatMainView : UserControl
 
     private void KeyDownEnter(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter) e.Handled = true;
+        MessageBoxManager.GetMessageBoxStandard(string.Empty, e.Key.ToString()).ShowAsPopupAsync(this);
     }
 }
