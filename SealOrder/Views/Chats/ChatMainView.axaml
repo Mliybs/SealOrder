@@ -21,7 +21,8 @@
         Focusable='False' />
       <TextBox
         Name='Input'
-        MaxHeight='100' />
+        MaxHeight='100'
+        KeyDown='KeyDownEnter' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>

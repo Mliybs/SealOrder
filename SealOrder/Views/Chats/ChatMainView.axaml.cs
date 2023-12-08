@@ -45,4 +45,9 @@ public partial class ChatMainView : UserControl
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
     }
+
+    private void KeyDownEnter(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter) e.Handled = true;
+    }
 }
