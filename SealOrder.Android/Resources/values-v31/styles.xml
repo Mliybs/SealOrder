@@ -20,4 +20,10 @@
          parent ="MyTheme.NoActionBar">
     <item name="android:windowIsTranslucent">true</item>
   </style>
+  <style name="MyTheme.Chat"
+         parent="MyTheme.NoActionBar">
+    <item name="android:editTextStyle">
+      <item name="android:imeOptions">actionSend</item>
+    </item>
+  </style>
 </resources>
