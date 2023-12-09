@@ -10,5 +10,9 @@
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowTranslucentStatus">true</item>
     <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:editTextStyle">@style/DefaultEditTextStyle</item>
+  </style>
+  <style name="DefaultEditTextStyle" parent="Widget.AppCompat.EditText">
+    <item name="android:imeOptions">actionSend</item>
   </style>
 </resources>
