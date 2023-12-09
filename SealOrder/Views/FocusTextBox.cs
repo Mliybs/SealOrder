@@ -1,11 +1,10 @@
-
 namespace SealOrder.Views;
 
 public partial class FocusTextBox : TextBox
 {
     public FocusTextBox()
     {
-        TextInputOptions.SetContentType(this, TextInputContentType.Social);
+        TextInputOptions.SetContentType(this, TextInputContentType.Url);
     }
 
     protected override Type StyleKeyOverride => typeof(TextBox);
