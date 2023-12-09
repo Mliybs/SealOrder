@@ -23,7 +23,8 @@
       <TextBox
         Name='Input'
         MaxHeight='100'
-        TextInputOptions.ContentType='Url' />
+        TextInputOptions.ContentType='Social'
+        TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
