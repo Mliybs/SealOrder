@@ -1,3 +1,4 @@
+
 namespace SealOrder.Views;
 
 public partial class FocusTextBox : TextBox
@@ -12,5 +13,15 @@ public partial class FocusTextBox : TextBox
     public void LoseFocus()
     {
         base.OnLostFocus(new());
+    }
+
+    protected override void OnTextInput(TextInputEventArgs e)
+    {
+        // base.OnTextInput(e);
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        // base.OnKeyDown(e);
     }
 }
