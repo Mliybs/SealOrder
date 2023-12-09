@@ -45,8 +45,4 @@ public partial class ChatMainView : UserControl
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
     }
-
-    private void InputMethodClient(object sender, TextInputMethodClientRequestedEventArgs e)
-    {
-    }
 }

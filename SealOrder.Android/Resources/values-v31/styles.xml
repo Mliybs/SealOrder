@@ -14,10 +14,6 @@
     <item name="postSplashScreenTheme">@style/MyTheme.Main</item>
     <item name="android:windowTranslucentStatus">true</item>
     <item name="android:windowTranslucentNavigation">true</item>
-    <item name="android:editTextStyle">@style/DefaultEditTextStyle</item>
-  </style>
-  <style name="DefaultEditTextStyle" parent="Widget.AppCompat.EditText">
-    <item name="android:imeOptions">actionSend</item>
   </style>
   <style name="MyTheme.Main"
          parent="MyTheme.NoActionBar">

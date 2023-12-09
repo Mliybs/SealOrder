@@ -22,7 +22,8 @@
         Focusable='False' />
       <views:FocusTextBox
         Name='Input'
-        MaxHeight='100' />
+        MaxHeight='100'
+        TextInputOptions.ContentType='Search' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
