@@ -23,7 +23,7 @@
       <views:FocusTextBox
         Name='Input'
         MaxHeight='100'
-        TextInputOptions.ContentType='Search' />
+        TextInputOptions.ContentType='Social' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
