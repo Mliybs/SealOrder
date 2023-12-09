@@ -5,7 +5,7 @@
              xmlns:views="clr-namespace:SealOrder.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SealOrder.Views.ChatMainView">
-  <DockPanel Padding='0 15'>
+  <DockPanel Margin='0 0 0 15'>
     <DockPanel
       DockPanel.Dock='Top'>
       <TextBlock
