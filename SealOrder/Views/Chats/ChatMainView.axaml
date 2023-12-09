@@ -20,10 +20,10 @@
         Content='发送'
         Click='Send'
         Focusable='False' />
-      <views:FocusTextBox
+      <TextBox
         Name='Input'
         MaxHeight='100'
-        TextInputOptions.ContentType='Social' />
+        TextInputOptions.ContentType='Url' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
