@@ -23,7 +23,7 @@
       <TextBox
         Name='Input'
         MaxHeight='100'
-        TextInputOptions.ContentType='Social'
+        TextInputOptions.Multiline='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
     <ScrollViewer>
