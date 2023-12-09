@@ -5,9 +5,14 @@ public partial class FocusTextBox : TextBox
 {
     protected override Type StyleKeyOverride => typeof(TextBox);
 
+    protected override void OnGotFocus(GotFocusEventArgs e)
+    {
+        base.OnGotFocus(e);
+    }
+
     protected override void OnLostFocus(RoutedEventArgs e)
     {
-        // base.OnLostFocus(e);
+        base.OnLostFocus(e);
     }
 
     public void LoseFocus()
@@ -17,16 +22,16 @@ public partial class FocusTextBox : TextBox
 
     protected override void OnTextInput(TextInputEventArgs e)
     {
-        // base.OnTextInput(e);
+        base.OnTextInput(e);
     }
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
-        // base.OnKeyDown(e);
+        base.OnKeyDown(e);
     }
 
     protected override void OnKeyUp(KeyEventArgs e)
     {
-        // base.OnKeyUp(e);
+        base.OnKeyUp(e);
     }
 }

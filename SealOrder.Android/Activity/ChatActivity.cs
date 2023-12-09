@@ -1,3 +1,5 @@
+using Android.Views.InputMethods;
+
 namespace SealOrder.Android;
 
 [Activity(
@@ -54,6 +56,8 @@ public class ChatActivity : AvaloniaMainActivity
         {
             Content = view
         });
+
+        ((InputMethodManager)GetSystemService(InputMethodService)!).ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.None);
     }
 
     public P2PConnect Connect { get; } = new();
