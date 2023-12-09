@@ -4,9 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:SealOrder.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SealOrder.Views.ChatMainView"
-             Padding='0 15'>
-  <DockPanel>
+             x:Class="SealOrder.Views.ChatMainView">
+  <DockPanel Padding='0 15'>
     <DockPanel
       DockPanel.Dock='Top'>
       <TextBlock
@@ -17,11 +16,14 @@
       DockPanel.Dock='Bottom'>
       <Button
         DockPanel.Dock='Right'
+        Padding='10 5'
         Content='发送'
         Click='Send'
+        VerticalAlignment='Bottom'
         Focusable='False' />
       <TextBox
         Name='Input'
+        Margin='2'
         MaxLines='7'
         AcceptsReturn='True'
         TextInputOptions.Multiline='True'
