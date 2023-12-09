@@ -67,6 +67,6 @@
                   Content='设置'
                   Name='Settings'/>
               </Grid>
-              <views:FocusTextBox />
+              <views:ChatView />
             </DockPanel>
 </UserControl>
