@@ -24,7 +24,7 @@
         Name='Input'
         MaxHeight='100'
         TextInputOptions.Multiline='True'
-        TextInputOptions.ReturnKeyType='Send' />
+        TextInputOptions.ReturnKeyType='Return' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
