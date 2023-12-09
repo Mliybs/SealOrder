@@ -22,7 +22,8 @@
         Focusable='False' />
       <TextBox
         Name='Input'
-        MaxHeight='100'
+        MaxLines='7'
+        AcceptsReturn='True'
         TextInputOptions.Multiline='True'
         TextInputOptions.ReturnKeyType='Return' />
     </DockPanel>
