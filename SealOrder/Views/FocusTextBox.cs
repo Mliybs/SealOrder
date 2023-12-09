@@ -24,4 +24,9 @@ public partial class FocusTextBox : TextBox
     {
         // base.OnKeyDown(e);
     }
+
+    protected override void OnKeyUp(KeyEventArgs e)
+    {
+        // base.OnKeyUp(e);
+    }
 }

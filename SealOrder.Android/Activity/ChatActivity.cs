@@ -2,7 +2,7 @@ namespace SealOrder.Android;
 
 [Activity(
     Label = "SealOrder",
-    Theme = "@style/MyTheme.Chat",
+    Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode,
     WindowSoftInputMode = SoftInput.AdjustResize)]
