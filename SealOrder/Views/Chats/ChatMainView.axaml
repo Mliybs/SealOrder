@@ -5,7 +5,7 @@
              xmlns:views="clr-namespace:SealOrder.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SealOrder.Views.ChatMainView">
-  <DockPanel Margin='0 0 0 15'>
+  <DockPanel>
     <DockPanel
       DockPanel.Dock='Top'>
       <TextBlock
@@ -16,6 +16,7 @@
       DockPanel.Dock='Bottom'>
       <Button
         DockPanel.Dock='Right'
+        Margin='2'
         Padding='10 5'
         Content='发送'
         Click='Send'
@@ -25,12 +26,18 @@
         Name='Input'
         Margin='2'
         MaxLines='7'
+        TextWrapping="Wrap"
         AcceptsReturn='True'
-        TextInputOptions.Multiline='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
     <ScrollViewer>
       <StackPanel Name='Messages'>
+        <StackPanel.Styles>
+          <Style Selector='TextBlock.You'>
+          </Style>
+          <Style Selector='TextBlock.Me'>
+          </Style>
+        </StackPanel.Styles>
       </StackPanel>
     </ScrollViewer>
   </DockPanel>
