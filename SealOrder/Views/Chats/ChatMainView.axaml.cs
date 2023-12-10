@@ -9,7 +9,7 @@ public partial class ChatMainView : UserControl
 {
     public event Func<byte[], Task<int>>? ToSend;
 
-    private bool notPressed;
+    private bool notPressed = true;
 
     public ChatMainView()
     {
@@ -30,6 +30,11 @@ public partial class ChatMainView : UserControl
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
         Viewer.PointerPressed += (sender, e) => notPressed = false;
         Viewer.PointerReleased += (sender, e) => notPressed = true;
+    }
+
+    private void Hold(object sender, HoldingRoutedEventArgs e)
+    {
+        notPressed = !(e.HoldingState == HoldingState.Started);
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
