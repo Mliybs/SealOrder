@@ -30,11 +30,7 @@ public partial class ChatMainView : UserControl
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
         Viewer.PointerPressed += (sender, e) => notPressed = false;
         Viewer.PointerReleased += (sender, e) => notPressed = true;
-    }
-
-    private void Hold(object sender, HoldingRoutedEventArgs e)
-    {
-        notPressed = !(e.HoldingState == HoldingState.Started);
+        Viewer.Holding += (sender, e) => notPressed = !(e.HoldingState == HoldingState.Started);
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
