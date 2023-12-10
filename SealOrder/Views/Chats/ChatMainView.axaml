@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:SealOrder.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SealOrder.Views.ChatMainView">
+             x:Class="SealOrder.Views.ChatMainView"
+             Loaded='OnLoad'>
   <DockPanel>
     <DockPanel
       DockPanel.Dock='Top'>
@@ -16,8 +17,9 @@
       DockPanel.Dock='Bottom'>
       <Button
         DockPanel.Dock='Right'
-        Margin='2'
-        Padding='10 5'
+        Margin='2 2'
+        Padding='12 5'
+        Name='SendButton'
         Content='发送'
         Click='Send'
         VerticalAlignment='Bottom'

@@ -23,6 +23,11 @@ public partial class ChatMainView : UserControl
         ToSend += send;
     }
 
+    private void OnLoad(object sender, RoutedEventArgs e)
+    {
+        SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
+    }
+
     private void Received(in ReadOnlySequence<byte> bytes)
     {
         Messages.Children.Add(new TextBlock()
