@@ -32,12 +32,26 @@
         AcceptsReturn='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
-    <ScrollViewer>
+    <ScrollViewer Name='Viewer'>
       <StackPanel Name='Messages'>
         <StackPanel.Styles>
-          <Style Selector='TextBlock.You'>
+          <Style Selector='Border'>
+            <Setter Property='BorderBrush' Value='Black' />
+            <Setter Property='BorderThickness' Value='2' />
+            <Setter Property='CornerRadius' Value='5' />
+            <Setter Property='Margin' Value='10' />
+            <Setter Property='Padding' Value='10' />
+            <Setter Property='MaxWidth' Value='100' />
           </Style>
-          <Style Selector='TextBlock.Me'>
+          <Style Selector='Border.You > TextBlock'>
+            <Setter Property='HorizontalAlignment' Value='Left' />
+            <Setter Property='LineHeight' Value='35' />
+            <Setter Property='TextWrapping' Value='Wrap' />
+          </Style>
+          <Style Selector='Border.Me > TextBlock'>
+            <Setter Property='HorizontalAlignment' Value='Right' />
+            <Setter Property='LineHeight' Value='35' />
+            <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
         </StackPanel.Styles>
       </StackPanel>
