@@ -42,14 +42,22 @@
             <Setter Property='Margin' Value='10' />
             <Setter Property='Padding' Value='10' />
             <Setter Property='MaxWidth' Value='100' />
+
+            <Style Selector='^.You'>
+              <Setter Property='HorizontalAlignment' Value='Left' />
+            </Style>
+            
+            <Style Selector='^.Me'>
+              <Setter Property='HorizontalAlignment' Value='Right' />
+            </Style>
           </Style>
+
           <Style Selector='Border.You > TextBlock'>
-            <Setter Property='HorizontalAlignment' Value='Left' />
             <Setter Property='LineHeight' Value='35' />
             <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
+
           <Style Selector='Border.Me > TextBlock'>
-            <Setter Property='HorizontalAlignment' Value='Right' />
             <Setter Property='LineHeight' Value='35' />
             <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
