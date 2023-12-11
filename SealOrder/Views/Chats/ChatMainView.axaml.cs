@@ -9,8 +9,6 @@ public partial class ChatMainView : UserControl
 {
     public event Func<byte[], Task<int>>? ToSend;
 
-    private bool notPressed = true;
-
     public ChatMainView()
     {
         InitializeComponent();
@@ -28,9 +26,7 @@ public partial class ChatMainView : UserControl
     private void OnLoad(object sender, RoutedEventArgs e)
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
-        Viewer.PointerPressed += (sender, e) => notPressed = false;
-        Viewer.PointerReleased += (sender, e) => notPressed = true;
-        Viewer.Holding += (sender, e) => notPressed = !(e.HoldingState == HoldingState.Started);
+        Viewer.ScrollChanged += (sender, e) => { if (e.OffsetDelta.Y == 0) Viewer.ScrollToEnd(); };
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
@@ -43,7 +39,6 @@ public partial class ChatMainView : UserControl
             },
             Classes = { "You" }
         });
-        if (notPressed) Viewer.ScrollToEnd();
     }
 
     private void Send(object sender, RoutedEventArgs e)
@@ -61,6 +56,5 @@ public partial class ChatMainView : UserControl
             Classes = { "Me" }
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
-        if (notPressed) Viewer.ScrollToEnd();
     }
 }
