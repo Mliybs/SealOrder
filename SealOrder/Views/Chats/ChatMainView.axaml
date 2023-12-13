@@ -33,7 +33,7 @@
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
     <ScrollViewer Name='Viewer'>
-      <StackPanel Name='Messages'>
+      <VirtualizingStackPanel Name='Messages'>
         <StackPanel.Styles>
           <Style Selector='Border'>
             <Setter Property='BorderBrush' Value='Black' />
@@ -60,7 +60,7 @@
             <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
         </StackPanel.Styles>
-      </StackPanel>
+      </VirtualizingStackPanel>
     </ScrollViewer>
   </DockPanel>
 </UserControl>
