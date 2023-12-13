@@ -33,8 +33,8 @@
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
     <ScrollViewer Name='Viewer'>
-      <VirtualizingStackPanel Name='Messages'>
-        <VirtualizingStackPanel.Styles>
+      <StackPanel Name='Messages'>
+        <StackPanel.Styles>
           <Style Selector='Border'>
             <Setter Property='BorderBrush' Value='Black' />
             <Setter Property='BorderThickness' Value='2' />
@@ -59,8 +59,8 @@
           <Style Selector='Border.Me > TextBlock'>
             <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
-        </VirtualizingStackPanel.Styles>
-      </VirtualizingStackPanel>
+        </StackPanel.Styles>
+      </StackPanel>
     </ScrollViewer>
   </DockPanel>
 </UserControl>
