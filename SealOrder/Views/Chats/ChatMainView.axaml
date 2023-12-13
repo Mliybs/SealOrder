@@ -34,7 +34,7 @@
     </DockPanel>
     <ScrollViewer Name='Viewer'>
       <VirtualizingStackPanel Name='Messages'>
-        <StackPanel.Styles>
+        <VirtualizingStackPanel.Styles>
           <Style Selector='Border'>
             <Setter Property='BorderBrush' Value='Black' />
             <Setter Property='BorderThickness' Value='2' />
@@ -59,7 +59,7 @@
           <Style Selector='Border.Me > TextBlock'>
             <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
-        </StackPanel.Styles>
+        </VirtualizingStackPanel.Styles>
       </VirtualizingStackPanel>
     </ScrollViewer>
   </DockPanel>
