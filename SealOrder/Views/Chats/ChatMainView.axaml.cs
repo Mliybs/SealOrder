@@ -31,7 +31,7 @@ public partial class ChatMainView : UserControl
 
     private void Received(in ReadOnlySequence<byte> bytes)
     {
-        Messages.Children.Add(new Border()
+        Messages.Items.Add(new Border()
         {
             Child = new TextBlock()
             {
@@ -45,9 +45,9 @@ public partial class ChatMainView : UserControl
     {
         if (ToSend is null) return;
         var text = Input.Text;
-        if (text is null) return;
+        if (string.IsNullOrEmpty(text)) return;
         Input.Text = null;
-        Messages.Children.Add(new Border()
+        Messages.Items.Add(new Border()
         {
             Child = new TextBlock()
             {
