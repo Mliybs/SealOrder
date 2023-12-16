@@ -26,10 +26,10 @@ jobs:
       - name: 检查
         uses: actions/checkout@v4
 
-      - name: 安装.NET7
+      - name: 安装.NET8
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
 
       - name: 安装安卓工作负载
         run: dotnet workload install android

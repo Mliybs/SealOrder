@@ -33,6 +33,12 @@
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
     <ScrollViewer Name='Viewer'>
+      <ScrollViewer.Transitions>
+        <Transitions>
+          <VectorTransition Property='Offset' Duration='0:0:0.1' />
+        </Transitions>
+      </ScrollViewer.Transitions>
+
       <StackPanel Name='Messages'>
         <StackPanel.Styles>
           <Style Selector='Border'>
