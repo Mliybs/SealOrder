@@ -66,12 +66,6 @@
             <Setter Property='TextWrapping' Value='Wrap' />
           </Style>
         </StackPanel.Styles>
-        <Border Classes='You'>
-          <TextBlock Text='114514' />
-        </Border>
-        <Border Classes='Me'>
-          <TextBlock Text='114514' />
-        </Border>
       </StackPanel>
     </ScrollViewer>
   </DockPanel>
