@@ -26,7 +26,7 @@ public partial class ChatMainView : UserControl
     private void OnLoad(object sender, RoutedEventArgs e)
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
-        // Viewer.ScrollChanged += (sender, e) => { if (e.OffsetDelta.Y == 0 && e.ExtentDelta.Y != 0) Viewer.ScrollToEnd(); };
+        Viewer.ScrollChanged += (sender, e) => { if (e.OffsetDelta.Y == 0 && e.ExtentDelta.Y != 0) Viewer.ScrollToEnd(); };
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
