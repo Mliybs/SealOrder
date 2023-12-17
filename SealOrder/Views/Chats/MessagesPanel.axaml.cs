@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace SealOrder.Views;
 
-public partial class Messages : UserControl
+public partial class MessagesPanel : UserControl
 {
-    public Messages()
+    public MessagesPanel()
     {
         InitializeComponent();
     }

@@ -28,7 +28,7 @@ public partial class ChatMainView : UserControl
     private void OnLoad(object sender, RoutedEventArgs e)
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
-        var control = Handle?.Invoke("Viewer", new Messages()) ?? new ScrollViewer() { Name = "Viewer" };
+        var control = Handle?.Invoke("Viewer", new MessagesPanel()) ?? new ScrollViewer() { Name = "Viewer" };
         Panel.Children.Add(control);
     }
 
