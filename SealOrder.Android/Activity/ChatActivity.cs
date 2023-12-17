@@ -14,7 +14,10 @@ public class ChatActivity : AvaloniaMainActivity
     {
         base.OnCreate(savedInstanceState);
 
-        var _view = new LinearLayout(this);
+        var _view = new LinearLayout(this)
+        {
+            LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)
+        };
 
         var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x));
 
