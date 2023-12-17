@@ -32,10 +32,16 @@
         AcceptsReturn='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
-    <ScrollViewer Name='Viewer' IsScrollInertiaEnabled='False'>
+    <ScrollViewer Name='Viewer' IsScrollInertiaEnabled='False'
+      Gestures.ScrollGestureInertiaStartingEvent='ScrollInertia'>
+      <ScrollViewer.GestureRecognizers>
+        <ScrollGestureRecognizer CanHorizontallyScroll="False" CanVerticallyScroll="True" />
+      </ScrollViewer.GestureRecognizers>
+
       <ScrollViewer.Transitions>
         <Transitions>
-          <VectorTransition Property='Offset' Duration='0:0:0.1' />
+          <VectorTransition Property='Offset' Duration='0:0:0.05'
+            FillMode="Forward" Easing='SineEaseOut' />
         </Transitions>
       </ScrollViewer.Transitions>
 
