@@ -32,6 +32,7 @@
         AcceptsReturn='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
+    <ScrollViewer Name='Viewer'>
     <StackPanel Name='Messages'>
       <StackPanel.Styles>
         <Style Selector='Border'>
@@ -60,5 +61,6 @@
         </Style>
       </StackPanel.Styles>
     </StackPanel>
+    </ScrollViewer>
   </DockPanel>
 </UserControl>

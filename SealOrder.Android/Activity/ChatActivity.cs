@@ -14,11 +14,6 @@ public class ChatActivity : AvaloniaMainActivity
     {
         base.OnCreate(savedInstanceState);
 
-        var _view = new LinearLayout(this)
-        {
-            LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)
-        };
-
         var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x));
 
         if (Intent is not null) view.Loaded += async (sender, e) =>
@@ -57,19 +52,10 @@ public class ChatActivity : AvaloniaMainActivity
             Connect.Received(received);
         };
 
-        var scroller = new ScrollView(this)
-        {
-            LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent, 1.0f)
-        };
-        
-        scroller.AddView(new AvaloniaView(this)
+        SetContentView(new AvaloniaView(this)
         {
             Content = view
         });
-
-        _view.AddView(scroller);
-
-        SetContentView(_view);
     }
 
     public P2PConnect Connect { get; } = new();

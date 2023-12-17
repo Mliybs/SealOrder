@@ -26,11 +26,11 @@ public partial class ChatMainView : UserControl
     private void OnLoad(object sender, RoutedEventArgs e)
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
+        Viewer.ScrollChanged += (sender, e) => { if (e.ExtentDelta.Y != 0 && e.OffsetDelta.Y == 0) Viewer.ScrollToEnd(); };
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
     {
-        /*
         Messages.Children.Add(new Border()
         {
             Child = new TextBlock()
@@ -39,20 +39,10 @@ public partial class ChatMainView : UserControl
             },
             Classes = { "You" }
         });
-        */
     }
 
     private void Send(object sender, RoutedEventArgs e)
     {
-        Messages.Children.Add(new Border()
-        {
-            Child = new TextBlock()
-            {
-                Text = Input.Text
-            },
-            Classes = { "Me" }
-        });
-        /*
         if (ToSend is null) return;
         var text = Input.Text;
         if (string.IsNullOrEmpty(text)) return;
@@ -66,6 +56,5 @@ public partial class ChatMainView : UserControl
             Classes = { "Me" }
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
-        */
     }
 }
