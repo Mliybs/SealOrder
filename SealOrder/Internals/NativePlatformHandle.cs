@@ -7,8 +7,5 @@ public class NativePlatformHandle: NativeControlHost
 
     public NativePlatformHandle(IPlatformHandle handle) => Implementation = handle;
 
-    protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent)
-    {
-        return Implementation;
-    }
+    protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent) => Implementation;
 }

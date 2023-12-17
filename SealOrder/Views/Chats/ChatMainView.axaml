@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SealOrder.Views.ChatMainView"
              Loaded='OnLoad'>
-  <DockPanel>
+  <DockPanel Name='Panel'>
     <DockPanel
       DockPanel.Dock='Top'>
       <TextBlock
@@ -32,45 +32,5 @@
         AcceptsReturn='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
-    <ScrollViewer Name='Viewer'>
-      <ScrollViewer.GestureRecognizers>
-        <ScrollGestureRecognizer CanHorizontallyScroll="False" CanVerticallyScroll="True" />
-      </ScrollViewer.GestureRecognizers>
-
-      <ScrollViewer.Transitions>
-        <Transitions>
-          <VectorTransition Property='Offset' Duration='0:0:0.05' Easing='SineEaseOut' />
-        </Transitions>
-      </ScrollViewer.Transitions>
-
-      <StackPanel Name='Messages'>
-        <StackPanel.Styles>
-          <Style Selector='Border'>
-            <Setter Property='BorderBrush' Value='Black' />
-            <Setter Property='BorderThickness' Value='2' />
-            <Setter Property='CornerRadius' Value='5' />
-            <Setter Property='Margin' Value='10' />
-            <Setter Property='Padding' Value='10' />
-            <Setter Property='MaxWidth' Value='270' />
-
-            <Style Selector='^.You'>
-              <Setter Property='HorizontalAlignment' Value='Left' />
-            </Style>
-
-            <Style Selector='^.Me'>
-              <Setter Property='HorizontalAlignment' Value='Right' />
-            </Style>
-          </Style>
-
-          <Style Selector='Border.You > TextBlock'>
-            <Setter Property='TextWrapping' Value='Wrap' />
-          </Style>
-
-          <Style Selector='Border.Me > TextBlock'>
-            <Setter Property='TextWrapping' Value='Wrap' />
-          </Style>
-        </StackPanel.Styles>
-      </StackPanel>
-    </ScrollViewer>
   </DockPanel>
 </UserControl>

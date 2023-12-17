@@ -9,7 +9,7 @@ public partial class ChatMainView : UserControl
 {
     public event Func<byte[], Task<int>>? ToSend;
 
-    public required NativePlatformHandle Handle { get; init; }
+    public Func<string, Control, Control>? Handle { get; init; }
 
     public ChatMainView()
     {
@@ -28,19 +28,13 @@ public partial class ChatMainView : UserControl
     private void OnLoad(object sender, RoutedEventArgs e)
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
-        Viewer.ScrollChanged += (sender, e) => { if (e.OffsetDelta.Y == 0 && e.ExtentDelta.Y != 0) Viewer.ScrollToEnd(); Input.Text = e.OffsetDelta.Y.ToString(); };
-        try
-        {
-            Viewer.Content = Handle;
-        }
-        catch (Exception exc)
-        {
-            Input.Text = $"{exc.GetType()} {exc.Message}";
-        }
+        var control = Handle?.Invoke("Viewer", new Messages()) ?? new ScrollViewer() { Name = "Viewer" };
+        Panel.Children.Add(control);
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
     {
+        /*
         Messages.Children.Add(new Border()
         {
             Child = new TextBlock()
@@ -49,10 +43,26 @@ public partial class ChatMainView : UserControl
             },
             Classes = { "You" }
         });
+        */
     }
 
     private void Send(object sender, RoutedEventArgs e)
     {
+        if (this.FindControl<StackPanel>("Messages") is StackPanel panel)
+            panel.Children.Add(new Border()
+            {
+                Child = new TextBlock()
+                {
+                    Text = Input.Text
+                },
+                Classes = { "Me" }
+            });
+
+        else
+        {
+            Input.Text = "null";
+        }
+        /*
         if (ToSend is null) return;
         var text = Input.Text;
         if (string.IsNullOrEmpty(text)) return;
@@ -66,5 +76,6 @@ public partial class ChatMainView : UserControl
             Classes = { "Me" }
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
+        */
     }
 }
