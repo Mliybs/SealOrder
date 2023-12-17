@@ -9,7 +9,7 @@ public partial class ChatMainView : UserControl
 {
     public event Func<byte[], Task<int>>? ToSend;
 
-    public required IPlatformHandle Handle { get; init; }
+    public required NativePlatformHandle Handle { get; init; }
 
     public ChatMainView()
     {
