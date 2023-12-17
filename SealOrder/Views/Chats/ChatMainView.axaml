@@ -39,8 +39,7 @@
 
       <ScrollViewer.Transitions>
         <Transitions>
-          <VectorTransition Property='Offset' Duration='0:0:0.05'
-            FillMode="Forward" Easing='SineEaseOut' />
+          <VectorTransition Property='Offset' Duration='0:0:0.05' Easing='SineEaseOut' />
         </Transitions>
       </ScrollViewer.Transitions>
 
