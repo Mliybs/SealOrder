@@ -9,8 +9,6 @@ public partial class ChatMainView : UserControl
 {
     public event Func<byte[], Task<int>>? ToSend;
 
-    public Func<string, Control, Control>? Handle { get; init; }
-
     public ChatMainView()
     {
         InitializeComponent();
@@ -28,8 +26,6 @@ public partial class ChatMainView : UserControl
     private void OnLoad(object sender, RoutedEventArgs e)
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
-        var control = Handle?.Invoke("Viewer", new MessagesPanel()) ?? new ScrollViewer() { Name = "Viewer" };
-        Panel.Children.Add(control);
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
@@ -48,20 +44,14 @@ public partial class ChatMainView : UserControl
 
     private void Send(object sender, RoutedEventArgs e)
     {
-        if (this.FindControl<StackPanel>("Messages") is StackPanel panel)
-            panel.Children.Add(new Border()
-            {
-                Child = new TextBlock()
-                {
-                    Text = Input.Text
-                },
-                Classes = { "Me" }
-            });
-
-        else
+        Messages.Children.Add(new Border()
         {
-            Input.Text = "null";
-        }
+            Child = new TextBlock()
+            {
+                Text = Input.Text
+            },
+            Classes = { "Me" }
+        });
         /*
         if (ToSend is null) return;
         var text = Input.Text;

@@ -14,15 +14,9 @@ public class ChatActivity : AvaloniaMainActivity
     {
         base.OnCreate(savedInstanceState);
 
-        var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x))
-        {
-            Handle = (name, control) =>
-            {
-                var scroller = new ScrollView(this);
-                scroller.AddView(new AvaloniaView(this) { Content = control });
-                return new NativePlatformHandle(new AndroidViewControlHandle(scroller)) { Name = name };
-            }
-        };
+        var _view = new LinearLayout(this);
+
+        var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x));
 
         if (Intent is not null) view.Loaded += async (sender, e) =>
         {
@@ -60,10 +54,19 @@ public class ChatActivity : AvaloniaMainActivity
             Connect.Received(received);
         };
 
-        SetContentView(new AvaloniaView(this)
+        var scroller = new ScrollView(this)
+        {
+            LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent, 1.0f)
+        };
+        
+        scroller.AddView(new AvaloniaView(this)
         {
             Content = view
         });
+
+        _view.AddView(scroller);
+
+        SetContentView(_view);
     }
 
     public P2PConnect Connect { get; } = new();
