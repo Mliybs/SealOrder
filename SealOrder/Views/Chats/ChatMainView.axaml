@@ -32,7 +32,7 @@
         AcceptsReturn='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
-    <ScrollViewer Name='Viewer' IsScrollInertiaEnabled='True'>
+    <ScrollViewer Name='Viewer' IsScrollInertiaEnabled='False'>
       <ScrollViewer.Transitions>
         <Transitions>
           <VectorTransition Property='Offset' Duration='0:0:0.1' />
