@@ -32,7 +32,7 @@
         AcceptsReturn='True'
         TextInputOptions.ReturnKeyType='Send' />
     </DockPanel>
-    <ScrollViewer Name='Viewer' Gestures.ScrollGestureInertiaStartingEvent='ScrollInertia'>
+    <ScrollViewer Name='Viewer'>
       <ScrollViewer.GestureRecognizers>
         <ScrollGestureRecognizer CanHorizontallyScroll="False" CanVerticallyScroll="True" />
       </ScrollViewer.GestureRecognizers>

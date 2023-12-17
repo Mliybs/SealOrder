@@ -27,6 +27,7 @@ public partial class ChatMainView : UserControl
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
         Viewer.ScrollChanged += (sender, e) => { if (e.OffsetDelta.Y == 0 && e.ExtentDelta.Y != 0) Viewer.ScrollToEnd(); };
+        Viewer.AddHandler(Gestures.ScrollGestureInertiaStartingEvent, (sender, e) => Viewer.Offset = e.Inertia);
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
@@ -57,7 +58,4 @@ public partial class ChatMainView : UserControl
         });
         ToSend.Invoke(Encoding.UTF8.GetBytes(text));
     }
-
-    private void ScrollInertia(object sender, ScrollGestureInertiaStartingEventArgs e) =>
-        Viewer.Offset = e.Inertia;
 }
