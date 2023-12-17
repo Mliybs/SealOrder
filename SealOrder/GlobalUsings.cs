@@ -44,6 +44,7 @@ global using Avalonia.Interactivity;
 global using Avalonia.Controls.Presenters;
 global using Avalonia.VisualTree;
 global using Avalonia.Threading;
+global using Avalonia.Platform;
 global using Avalonia.Platform.Storage;
 global using Avalonia.Media.Imaging;
 global using Avalonia.ReactiveUI;

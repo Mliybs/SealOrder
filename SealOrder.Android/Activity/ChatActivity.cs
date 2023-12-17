@@ -14,7 +14,10 @@ public class ChatActivity : AvaloniaMainActivity
     {
         base.OnCreate(savedInstanceState);
 
-        var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x));
+        var view = new ChatMainView(out var received, async x => await Connect.Socket.SendAsync(x))
+        {
+            Handle = new AndroidViewControlHandle(new global::Android.Widget.Button(this) { Text = "WCNM" })
+        };
 
         if (Intent is not null) view.Loaded += async (sender, e) =>
         {

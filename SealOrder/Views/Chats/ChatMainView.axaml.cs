@@ -9,6 +9,8 @@ public partial class ChatMainView : UserControl
 {
     public event Func<byte[], Task<int>>? ToSend;
 
+    public required IPlatformHandle Handle { get; init; }
+
     public ChatMainView()
     {
         InitializeComponent();
@@ -27,6 +29,14 @@ public partial class ChatMainView : UserControl
     {
         SendButton.Bind(IsVisibleProperty, Input.WhenAnyValue(x => x.Text, x => !string.IsNullOrEmpty(x)));
         Viewer.ScrollChanged += (sender, e) => { if (e.OffsetDelta.Y == 0 && e.ExtentDelta.Y != 0) Viewer.ScrollToEnd(); Input.Text = e.OffsetDelta.Y.ToString(); };
+        try
+        {
+            Viewer.Content = Handle;
+        }
+        catch (Exception exc)
+        {
+            Input.Text = $"{exc.GetType()} {exc.Message}";
+        }
     }
 
     private void Received(in ReadOnlySequence<byte> bytes)
