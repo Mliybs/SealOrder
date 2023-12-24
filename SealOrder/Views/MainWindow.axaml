@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:SealOrder.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SealOrder.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/Images/Icon.png"
         Title="SealOrder">
         <views:MainView />
 </Window>

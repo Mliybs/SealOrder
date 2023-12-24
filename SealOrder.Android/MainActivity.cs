@@ -39,7 +39,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         Share = dir =>
         {
-            var uri = FileProvider.GetUriForFile(this, PackageName, new File(dir));
+            var uri = FileProvider.GetUriForFile(this, PackageName!, new File(dir));
 
             var intent = new Intent(Intent.ActionSend);
 
@@ -54,7 +54,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         Open = dir =>
         {
-            var uri = FileProvider.GetUriForFile(this, PackageName, new File(dir));
+            var uri = FileProvider.GetUriForFile(this, PackageName!, new File(dir));
 
             var intent = new Intent(Intent.ActionView);
 

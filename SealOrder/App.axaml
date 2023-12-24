@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:SealOrder"
              x:Class="SealOrder.App"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
@@ -23,6 +23,16 @@
         <Style Selector='Button'>
             <Setter Property='Foreground' Value='White' />
             <Setter Property='Background' Value='Black' />
+        </Style>
+
+        <Style Selector='TextBox'>
+            <Setter Property='ContextMenu'>
+                <ContextMenu>
+                    <MenuItem Header='剪切' Command='{Binding $parent[TextBox].Cut}' IsEnabled='{Binding $parent[TextBox].CanCut}' />
+                    <MenuItem Header='复制' Command='{Binding $parent[TextBox].Copy}' IsEnabled='{Binding $parent[TextBox].CanCopy}' />
+                    <MenuItem Header='粘贴' Command='{Binding $parent[TextBox].Paste}' IsEnabled='{Binding $parent[TextBox].CanPaste}' />
+                </ContextMenu>
+            </Setter>
         </Style>
     </Application.Styles>
 </Application>
