@@ -40,14 +40,14 @@
       Content='进入服务端模式'
       Command='{Binding ServerMode}'
       CommandParameter='{Binding PublicIP}'
-      Focusable='False' />
+      GotFocus='Focused' />
 
     <Button
       Grid.Row='3'
       Grid.Column='0'
       Content='获取当前可用公网IP'
       Command='{Binding GetIP}'
-      Focusable='False' />
+      GotFocus='Focused' />
 
 
     <TextBlock
@@ -69,6 +69,6 @@
       Content='进入客户端模式'
       Command='{Binding ClientMode}'
       CommandParameter='{Binding InputIP}'
-      Focusable='False' />
+      GotFocus='Focused' />
   </Grid>
 </UserControl>
