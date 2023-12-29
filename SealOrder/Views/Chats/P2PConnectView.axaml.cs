@@ -11,7 +11,7 @@ public partial class P2PConnectView : UserControl
         InitializeComponent();
     }
 
-    private void Focused(object sender, RoutedEventArgs e)
+    private void Focused(object sender, GotFocusEventArgs e)
     {
         var button = (Button)sender;
         button.Command?.Execute(button.CommandParameter);
